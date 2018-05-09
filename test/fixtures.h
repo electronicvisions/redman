@@ -22,6 +22,10 @@ struct TestResource : public boost::operators<TestResource> {
 	TestResource& operator+=(TestResource const& other);
 
 	value_type index;
+
+	friend std::ostream& operator<<(std::ostream& os, TestResource const& tr) {
+		return os << tr.index;
+	}
 };
 
 struct LessThanPredicate : public redman::DefaultPredicate<TestResource> {

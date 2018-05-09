@@ -43,21 +43,27 @@ struct Blacklist :
 
 	template<typename Set>
 	static
-	void enable(Set& set, typename Set::const_reference val)
+	void enable(Set& set, typename Set::const_reference val, bool force = false)
 	{
 		typename Set::const_iterator it = set.find(val);
-		if (it == set.end())
-			throw std::runtime_error("could not enable resource");
+		if (!force && (it == set.end())) {
+			std::stringstream error_msg;
+			error_msg << "could not enable resource: " << val;
+			throw std::runtime_error(error_msg.str().c_str());
+		}
 		set.erase(it);
 	}
 
 	template<typename Set>
 	static
-	void disable(Set& set, typename Set::const_reference val)
+	void disable(Set& set, typename Set::const_reference val, bool force=false)
 	{
 		std::pair<typename Set::iterator, bool> r = set.insert(val);
-		if (!r.second)
-			throw std::runtime_error("could not disable resource");
+		if (!force && !r.second) {
+			std::stringstream error_msg;
+			error_msg << "could not disable resource: " << val;
+			throw std::runtime_error(error_msg.str().c_str());
+		}
 	}
 
 	template<typename Set, typename Predicate>

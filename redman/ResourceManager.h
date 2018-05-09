@@ -121,7 +121,7 @@ public:
 	 *          fulfill the predicate.
 	 *  \throws std::invalid_argument When the resource is already disabled.
 	 */
-	void disable(Resource const& val);
+	void disable(Resource const& val, bool force=false);
 
 	/** Enable all resources.
 	 */
@@ -253,12 +253,12 @@ void ResourceManager<Res, Pol, Pred, Cmp>::enable(Res const& val) {
 }
 
 template<typename Res, typename Pol, typename Pred, typename Cmp>
-void ResourceManager<Res, Pol, Pred, Cmp>::disable(Res const& val) {
+void ResourceManager<Res, Pol, Pred, Cmp>::disable(Res const& val, bool force) {
 	if (!mPredicate(val))
 		throw std::invalid_argument(
 			"Resource rejected by predicate.");
 
-	Pol::disable(mSelection, val);
+	Pol::disable(mSelection, val, force);
 	mHasValue = true;
 }
 
