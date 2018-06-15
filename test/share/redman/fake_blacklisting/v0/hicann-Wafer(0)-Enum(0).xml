@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="10">
+<data class_id="0" tracking_level="0" version="1">
+	<px class_id="1" class_name="redman::resources::HicannWithBackend" tracking_level="1" version="0" object_id="_0">
+		<Hicann class_id="2" tracking_level="1" version="0" object_id="_1">
+			<Base class_id="3" tracking_level="0" version="0"></Base>
+			<neurons class_id="4" tracking_level="0" version="1">
+				<px class_id="5" tracking_level="1" version="0" object_id="_2">
+					<predicate class_id="6" tracking_level="0" version="0"></predicate>
+					<selection class_id="7" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</neurons>
+			<synapses class_id="8" tracking_level="0" version="1">
+				<px class_id="9" tracking_level="1" version="0" object_id="_3">
+					<predicate class_id="10" tracking_level="0" version="0"></predicate>
+					<selection class_id="11" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</synapses>
+			<drivers class_id="12" tracking_level="0" version="1">
+				<px class_id="13" tracking_level="1" version="0" object_id="_4">
+					<predicate class_id="14" tracking_level="0" version="0"></predicate>
+					<selection class_id="15" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</drivers>
+			<hbuses class_id="16" tracking_level="0" version="1">
+				<px class_id="17" tracking_level="1" version="0" object_id="_5">
+					<predicate class_id="18" tracking_level="0" version="0"></predicate>
+					<selection class_id="19" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</hbuses>
+			<vbuses class_id="20" tracking_level="0" version="1">
+				<px class_id="21" tracking_level="1" version="0" object_id="_6">
+					<predicate class_id="22" tracking_level="0" version="0"></predicate>
+					<selection class_id="23" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</vbuses>
+			<merger0 class_id="24" tracking_level="0" version="1">
+				<px class_id="25" tracking_level="1" version="0" object_id="_7">
+					<predicate class_id="26" tracking_level="0" version="0"></predicate>
+					<selection class_id="27" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</merger0>
+			<merger1 class_id="28" tracking_level="0" version="1">
+				<px class_id="29" tracking_level="1" version="0" object_id="_8">
+					<predicate class_id="30" tracking_level="0" version="0"></predicate>
+					<selection class_id="31" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</merger1>
+			<merger2 class_id="32" tracking_level="0" version="1">
+				<px class_id="33" tracking_level="1" version="0" object_id="_9">
+					<predicate class_id="34" tracking_level="0" version="0"></predicate>
+					<selection class_id="35" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</merger2>
+			<merger3 class_id="36" tracking_level="0" version="1">
+				<px class_id="37" tracking_level="1" version="0" object_id="_10">
+					<predicate class_id="38" tracking_level="0" version="0"></predicate>
+					<selection class_id="39" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</merger3>
+			<dnc_merger class_id="40" tracking_level="0" version="1">
+				<px class_id="41" tracking_level="1" version="0" object_id="_11">
+					<predicate class_id="42" tracking_level="0" version="0"></predicate>
+					<selection class_id="43" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+				</px>
+			</dnc_merger>
+		</Hicann>
+	</px>
+</data>
+</boost_serialization>
+
