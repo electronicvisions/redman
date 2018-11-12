@@ -5,7 +5,7 @@ import unittest
 import tempfile
 import shutil
 import pyredman as redman
-from pyhalbe.Coordinate import (Enum, Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal)
+from pyhalbe.Coordinate import (Enum, Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal, FPGAOnWafer, HICANNOnHS)
 import pyredman.load as load
 
 
@@ -23,14 +23,21 @@ class BackendTests(object):
     def test_wafer_with_backend(self):
         wid = Wafer(5)
         hid = HICANNOnWafer(Enum(23))
+        fid = FPGAOnWafer(Enum(42))
 
         wafer = redman.WaferWithBackend(self.backend, wid)
 
         hicanns = wafer.hicanns()
+        fpgas = wafer.fpgas()
 
         if not hicanns.has(hid):
             hicanns.enable(hid)
         self.assertTrue(hicanns.has(hid))
+        wafer.save()
+
+        if not fpgas.has(fid):
+            fpgas.enable(fid)
+        self.assertTrue(fpgas.has(fid))
         wafer.save()
 
         hicann = wafer.get(hid)
@@ -51,6 +58,24 @@ class BackendTests(object):
         self.assertTrue(nrns.has(absent))
         self.assertEqual(nrns.available(), n + 1)
 
+        fpga = wafer.get(fid)
+        self.assertTrue(fpga)
+
+        hoss = fpga.hicanns()
+        absent = HICANNOnHS(Enum(7))
+
+        if hoss.has(absent):
+            hoss.disable(absent)
+        self.assertFalse(hoss.has(absent))
+
+        # fpga is lazy-loaded and cached
+        self.assertFalse(wafer.get(fid).hicanns().has(absent))
+
+        n = hoss.available()
+        hoss.enable(absent)
+        self.assertTrue(hoss.has(absent))
+        self.assertEqual(hoss.available(), n + 1)
+
     def test_serialization_versions(self):
 
         hicann_with_backend_v0 = load.HicannWithBackend("share/redman/fake_blacklisting/v0/",
@@ -62,6 +87,7 @@ class BackendTests(object):
                                                       Wafer(), ignore_missing=False)
 
         self.assertTrue(wafer_with_backend_v0.hicanns().has_value())
+        self.assertFalse(wafer_with_backend_v0.fpgas().has_value())
 
         hicann_with_backend_v1 = load.HicannWithBackend("share/redman/fake_blacklisting/v1/",
                                                         HICANNGlobal(), ignore_missing=False)
@@ -72,6 +98,13 @@ class BackendTests(object):
                                                       Wafer(), ignore_missing=False)
 
         self.assertFalse(wafer_with_backend_v1.hicanns().has_value())
+        self.assertFalse(wafer_with_backend_v1.fpgas().has_value())
+
+        wafer_with_backend_v2 = load.WaferWithBackend("share/redman/fake_blacklisting/v2/",
+                                                      Wafer(), ignore_missing=False)
+
+        self.assertFalse(wafer_with_backend_v1.hicanns().has_value())
+        self.assertFalse(wafer_with_backend_v1.fpgas().has_value())
 
 class TestXMLBackend(BackendTests, unittest.TestCase):
     def setUp(self):

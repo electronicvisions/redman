@@ -81,3 +81,64 @@ TYPED_TEST(AWaferWithBackend, AllowsToInjectHicannResources) {
 	auto loaded = wafer.get(hi);
 	ASSERT_FALSE(loaded->neurons()->has(absent));
 }
+
+TYPED_TEST(AWaferWithBackend, PersistsDisabledFpgas) {
+	auto& wafer = TestFixture::wafer;
+	HMFC::FPGAOnWafer hi;
+	if (wafer.fpgas()->has(hi))
+		wafer.fpgas()->disable(hi);
+	wafer.save();
+
+	const WaferWithBackend cwafer(TestFixture::backend, TestFixture::wafer_coordinate);
+	ASSERT_FALSE(cwafer.fpgas()->has(hi));
+}
+
+TYPED_TEST(AWaferWithBackend, LoadsFpgas) {
+	auto& wafer = TestFixture::wafer;
+	auto fpgas = wafer.fpgas();
+	HMFC::FPGAOnWafer hi;
+	if (!fpgas->has(hi))
+		fpgas->enable(hi);
+	wafer.save();
+
+	boost::shared_ptr<Fpga> fpga = wafer.get(hi);
+	ASSERT_TRUE(static_cast<bool>(fpga));
+
+	boost::shared_ptr<components::HicannsOnHS> hicanns = fpga->hicanns();
+	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+
+	if (hicanns->has(absent))
+		hicanns->disable(absent);
+
+	// Fpgas are cached / lazy-loaded
+
+	boost::shared_ptr<const Fpga> cfpga = wafer.get(hi);
+	auto const& chicanns = cfpga->hicanns();
+	ASSERT_FALSE(chicanns->has(absent));
+}
+
+TYPED_TEST(AWaferWithBackend, DoesNotLoadDisabledFpga) {
+	auto& wafer = TestFixture::wafer;
+	auto fpgas = wafer.fpgas();
+
+	HMFC::FPGAOnWafer hi;
+
+	if (fpgas->has(hi))
+		fpgas->disable(hi);
+
+	boost::shared_ptr<Fpga> fpga = wafer.get(hi);
+	ASSERT_FALSE(static_cast<bool>(fpga));
+}
+
+TYPED_TEST(AWaferWithBackend, AllowsToInjectFpgaResources) {
+	auto& wafer = TestFixture::wafer;
+
+	boost::shared_ptr<Fpga> fpga = boost::make_shared<Fpga>();
+	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+	fpga->hicanns()->disable(absent);
+
+	HMFC::FPGAOnWafer hi;
+	wafer.inject(hi, fpga);
+	auto loaded = wafer.get(hi);
+	ASSERT_FALSE(loaded->hicanns()->has(absent));
+}

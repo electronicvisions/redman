@@ -4,6 +4,7 @@
 #include "redman/backend/Backend.h"
 #include "redman/resources/Wafer.h"
 #include "redman/resources/Hicann.h"
+#include "redman/resources/Fpga.h"
 
 using namespace redman;
 using namespace redman::backend;
@@ -20,7 +21,12 @@ public:
 	Hicann hicann;
 };
 
-#define fixture_for_component(TYPE, VAR)                                       \
+class AFpga : public ::testing::Test {
+public:
+	Fpga fpga;
+};
+
+#define fixture_for_hicann_component(TYPE, VAR)                                \
 	class Some##TYPE : public AHicann {                                        \
 	public:                                                                    \
 		Some##TYPE() : VAR(hicann.VAR()) {                                     \
@@ -28,10 +34,10 @@ public:
 		boost::shared_ptr<components::TYPE> VAR;                               \
 	}
 
-fixture_for_component(Neurons, neurons);
-fixture_for_component(Synapses, synapses);
+fixture_for_hicann_component(Neurons, neurons);
+fixture_for_hicann_component(Synapses, synapses);
 
-#undef fixture_for_component
+#undef fixture_for_hicann_component
 
 TEST_F(SomeNeurons, CanBeDisabled) {
 	ASSERT_EQ(512, neurons->available());
@@ -77,5 +83,63 @@ TEST_F(AHicann, CanIntegrateDisabledHLines) {
 		hbuses->enable(*it);
 	}
 	ASSERT_TRUE(hbuses->has(absent));
+
+}
+
+#define fixture_for_fpga_component(TYPE, VAR)                                                      \
+	class Some##TYPE : public AFpga                                                                \
+	{                                                                                              \
+	public:                                                                                        \
+		Some##TYPE() : VAR(fpga.VAR()) {}                                                          \
+		boost::shared_ptr<components::TYPE> VAR;                                                   \
+	}
+
+fixture_for_fpga_component(HicannsOnHS, hicanns);
+
+#undef fixture_for_fpga_component
+
+TEST_F(SomeHicannsOnHS, CanBeDisabled) {
+	ASSERT_EQ(8, hicanns->available());
+
+	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+	hicanns->disable(absent);
+
+	ASSERT_EQ(7, hicanns->available());
+}
+
+TEST_F(SomeHicannsOnHS, HaveTheCorrectCount) {
+	ASSERT_EQ(HMFC::HICANNOnHS::end, 8);
+	ASSERT_EQ(8, hicanns->available());
+}
+
+TEST_F(AFpga, ManagesAvailableHicanns) {
+	HMFC::HICANNOnHS hi;
+	auto hicanns = fpga.hicanns();
+	ASSERT_TRUE(hicanns->has(hi));
+	ASSERT_EQ(8, hicanns->available());
+
+	ASSERT_NO_THROW(hicanns->disable(hi));
+
+	ASSERT_FALSE(hicanns->has(hi));
+	ASSERT_FALSE(fpga.hicanns()->has(hi));
+
+	ASSERT_ANY_THROW(hicanns->disable(hi));
+}
+
+TEST_F(AFpga, CanIntegrateDisabledHicanns) {
+	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+
+	auto hicanns = fpga.hicanns();
+	for (auto it=hicanns->begin_disabled(); it!=hicanns->end_disabled(); ++it) {
+		FAIL() << "No HICANNs should be disabled";
+	}
+
+	hicanns->disable(absent);
+	ASSERT_FALSE(hicanns->has(absent));
+	for (auto it=hicanns->begin_disabled(); it!=hicanns->end_disabled(); ++it) {
+		ASSERT_EQ(absent, *it);
+		hicanns->enable(*it);
+	}
+	ASSERT_TRUE(hicanns->has(absent));
 
 }

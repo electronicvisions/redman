@@ -17,5 +17,8 @@ def WithBackend(ResourceWithBackend, backend_path, resource_coordinate, redman_b
 def HicannWithBackend(backend_path, hicann_global, redman_backend="XML", ignore_missing=True):
     return WithBackend("HicannWithBackend", backend_path, hicann_global, redman_backend, ignore_missing)
 
+def FpgaWithBackend(backend_path, fpga_global, redman_backend="XML", ignore_missing=True):
+    return WithBackend("FpgaWithBackend", backend_path, fpga_global, redman_backend, ignore_missing)
+
 def WaferWithBackend(backend_path, wafer, redman_backend="XML", ignore_missing=True):
     return WithBackend("WaferWithBackend", backend_path, wafer, redman_backend, ignore_missing)

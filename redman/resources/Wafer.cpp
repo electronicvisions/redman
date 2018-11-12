@@ -8,7 +8,8 @@ namespace redman {
 namespace resources {
 
 Wafer::Wafer()
-	: mHicanns(boost::make_shared<components::Hicanns>()) {
+	: mHicanns(boost::make_shared<components::Hicanns>()),
+	  mFpgas(boost::make_shared<components::Fpgas>()) {
 }
 
 Wafer::~Wafer() {
@@ -33,6 +34,19 @@ boost::shared_ptr<components::Hicanns> Wafer::hicanns() {
 
 boost::shared_ptr<components::Hicanns const> Wafer::hicanns() const {
 	return mHicanns;
+}
+
+bool Wafer::has(HMF::Coordinate::FPGAOnWafer const& f) const
+{
+	return mFpgas->has(f);
+}
+
+boost::shared_ptr<components::Fpgas> Wafer::fpgas() {
+	return mFpgas;
+}
+
+boost::shared_ptr<components::Fpgas const> Wafer::fpgas() const {
+	return mFpgas;
 }
 
 WaferWithBackend::WaferWithBackend(
@@ -63,21 +77,47 @@ boost::shared_ptr<Hicann> WaferWithBackend::get(HMF::Coordinate::HICANNOnWafer c
 		return boost::shared_ptr<Hicann>();
 	}
 
-	auto it = mCache.find(h);
-	if (it != mCache.end()) {
+	auto it = mHicannCache.find(h);
+	if (it != mHicannCache.end()) {
 		return it->second;
 	}
 
 	HMF::Coordinate::HICANNGlobal gh(h, mId);
 	auto tmp = HicannWithBackend(mBackend, gh);
 	auto res = boost::make_shared<Hicann>(tmp);
-	mCache.insert({h, res});
+	mHicannCache.insert({h, res});
 	return res;
 }
 
 void WaferWithBackend::inject(HMF::Coordinate::HICANNOnWafer const& h, boost::shared_ptr<Hicann> res)
 {
-	mCache[h] = res;
+	mHicannCache[h] = res;
+}
+
+boost::shared_ptr<Fpga> WaferWithBackend::get(HMF::Coordinate::FPGAOnWafer const& h) const
+{
+	if (!mBackend)
+		throw std::runtime_error("Wafer needs backend to load FPGA.");
+
+	if (!has(h)) {
+		return boost::shared_ptr<Fpga>();
+	}
+
+	auto it = mFpgaCache.find(h);
+	if (it != mFpgaCache.end()) {
+		return it->second;
+	}
+
+	HMF::Coordinate::FPGAGlobal gh(h, mId);
+	auto tmp = FpgaWithBackend(mBackend, gh);
+	auto res = boost::make_shared<Fpga>(tmp);
+	mFpgaCache.insert({h, res});
+	return res;
+}
+
+void WaferWithBackend::inject(HMF::Coordinate::FPGAOnWafer const& h, boost::shared_ptr<Fpga> res)
+{
+	mFpgaCache[h] = res;
 }
 
 void WaferWithBackend::load(bool ignore_missing)
