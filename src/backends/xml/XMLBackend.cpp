@@ -1,7 +1,7 @@
-#include "backends/xml/XMLBackend.h"
+#include "redman/backends/xml/XMLBackend.h"
 
 // polymorphic classes need to be registered in each backend
-#include "backends/export.ipp"
+#include "redman/backends/export.ipp"
 
 #include "redman/backend/interface.h"
 

@@ -40,17 +40,23 @@ def configure(cfg):
             uselib_store='LOG4REDMAN',
             mandatory=True)
 
+    cfg.check_boost(
+        lib='filesystem serialization system',
+        uselib_store='BOOST4REDMANXML'
+    )
+
 def build(bld):
     recurse(bld)
 
     bld(
             target          = 'redman_inc',
-            export_includes = ['.'],
+            export_includes = ['include'],
     )
 
     bld.shlib(
+            features        = 'cxx cxxshlib',
             target          = 'redman',
-            source          = bld.path.ant_glob('redman/**/*.cpp'),
+            source          = bld.path.ant_glob('src/redman/**/*.cpp'),
             use             = [
                 'BOOST4REDMAN',
                 'LOG4REDMAN',
@@ -60,6 +66,26 @@ def build(bld):
                 ],
             install_path    = 'lib',
     )
+
+    flags = {
+        'lib': [
+            'dl',
+        ]
+    }
+
+    bld.shlib(
+        features='cxx cxxshlib',
+        target='redman_xml',
+        source=bld.path.ant_glob('src/backends/xml/*.cpp'),
+        use=[
+            'BOOST4REDMANXML',
+            'redman',
+        ],
+        includes='.',
+        install_path='lib',
+        **flags
+    )
+
 
 def doc(dox):
     dox(features  = 'doxygen',

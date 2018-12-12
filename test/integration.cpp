@@ -1,4 +1,4 @@
-#include "test/test_with_backend.h"
+#include "redman/test/test_with_backend.h"
 
 #include <boost/make_shared.hpp>
 

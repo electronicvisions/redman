@@ -1,4 +1,4 @@
-#include "test/fixtures.h"
+#include "redman/test/fixtures.h"
 
 TestResource::TestResource(value_type idx) : index(idx) {
 	if (idx < begin || idx > end)

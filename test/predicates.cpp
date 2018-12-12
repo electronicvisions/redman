@@ -1,4 +1,4 @@
-#include "test/fixtures.h"
+#include "redman/test/fixtures.h"
 
 using namespace redman;
 

@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include "test/test_with_backend.h"
+#include "redman/test/test_with_backend.h"
 
 using namespace redman::backend;
 

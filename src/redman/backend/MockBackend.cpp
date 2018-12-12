@@ -1,7 +1,7 @@
 #include "redman/backend/MockBackend.h"
 
 // polymorphic classes need to be registered in each backend
-#include "backends/export.ipp"
+#include "redman/backends/export.ipp"
 
 #include <boost/serialization/serialization.hpp>
 #include <boost/archive/binary_oarchive.hpp>

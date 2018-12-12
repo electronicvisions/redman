@@ -1,4 +1,4 @@
-#include "test/fixtures.h"
+#include "redman/test/fixtures.h"
 
 TYPED_TEST_CASE(AManager, PolicyTypes);
 TYPED_TEST_CASE(AManagerWithEvenPredicate, PolicyTypes);
