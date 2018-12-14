@@ -61,7 +61,7 @@ ADD_RESOURCE(Mergers2, HMF::Coordinate::Merger2OnHICANN, 1)
 ADD_RESOURCE(Mergers3, HMF::Coordinate::Merger3OnHICANN, 1)
 ADD_RESOURCE(DNCMergers, HMF::Coordinate::DNCMergerOnHICANN, 1)
 
-ADD_RESOURCE(HicannsOnHS, HMF::Coordinate::HICANNOnHS, 1)
+ADD_RESOURCE(HighspeedLinksOnDNC, HMF::Coordinate::HighspeedLinkOnDNC, 1)
 ADD_RESOURCE(Fpgas, HMF::Coordinate::FPGAOnWafer, 1)
 
 #undef ADD_RESOURCE

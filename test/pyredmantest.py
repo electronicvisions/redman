@@ -5,7 +5,7 @@ import unittest
 import tempfile
 import shutil
 import pyredman as redman
-from pyhalbe.Coordinate import (Enum, Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal, FPGAOnWafer, HICANNOnHS)
+from pyhalbe.Coordinate import (Enum, Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal, FPGAOnWafer, HighspeedLinkOnDNC)
 import pyredman.load as load
 
 
@@ -61,15 +61,15 @@ class BackendTests(object):
         fpga = wafer.get(fid)
         self.assertTrue(fpga)
 
-        hoss = fpga.hicanns()
-        absent = HICANNOnHS(Enum(7))
+        hoss = fpga.hslinks()
+        absent = HighspeedLinkOnDNC(Enum(7))
 
         if hoss.has(absent):
             hoss.disable(absent)
         self.assertFalse(hoss.has(absent))
 
         # fpga is lazy-loaded and cached
-        self.assertFalse(wafer.get(fid).hicanns().has(absent))
+        self.assertFalse(wafer.get(fid).hslinks().has(absent))
 
         n = hoss.available()
         hoss.enable(absent)

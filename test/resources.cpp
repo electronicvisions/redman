@@ -94,52 +94,52 @@ TEST_F(AHicann, CanIntegrateDisabledHLines) {
 		boost::shared_ptr<components::TYPE> VAR;                                                   \
 	}
 
-fixture_for_fpga_component(HicannsOnHS, hicanns);
+fixture_for_fpga_component(HighspeedLinksOnDNC, hslinks);
 
 #undef fixture_for_fpga_component
 
-TEST_F(SomeHicannsOnHS, CanBeDisabled) {
-	ASSERT_EQ(8, hicanns->available());
+TEST_F(SomeHighspeedLinksOnDNC, CanBeDisabled) {
+	ASSERT_EQ(8, hslinks->available());
 
-	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
-	hicanns->disable(absent);
+	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	hslinks->disable(absent);
 
-	ASSERT_EQ(7, hicanns->available());
+	ASSERT_EQ(7, hslinks->available());
 }
 
-TEST_F(SomeHicannsOnHS, HaveTheCorrectCount) {
-	ASSERT_EQ(HMFC::HICANNOnHS::end, 8);
-	ASSERT_EQ(8, hicanns->available());
+TEST_F(SomeHighspeedLinksOnDNC, HaveTheCorrectCount) {
+	ASSERT_EQ(HMFC::HighspeedLinkOnDNC::end, 8);
+	ASSERT_EQ(8, hslinks->available());
 }
 
-TEST_F(AFpga, ManagesAvailableHicanns) {
-	HMFC::HICANNOnHS hi;
-	auto hicanns = fpga.hicanns();
-	ASSERT_TRUE(hicanns->has(hi));
-	ASSERT_EQ(8, hicanns->available());
+TEST_F(AFpga, ManagesAvailableHighspeedLinks) {
+	HMFC::HighspeedLinkOnDNC hi;
+	auto hslinks = fpga.hslinks();
+	ASSERT_TRUE(hslinks->has(hi));
+	ASSERT_EQ(8, hslinks->available());
 
-	ASSERT_NO_THROW(hicanns->disable(hi));
+	ASSERT_NO_THROW(hslinks->disable(hi));
 
-	ASSERT_FALSE(hicanns->has(hi));
-	ASSERT_FALSE(fpga.hicanns()->has(hi));
+	ASSERT_FALSE(hslinks->has(hi));
+	ASSERT_FALSE(fpga.hslinks()->has(hi));
 
-	ASSERT_ANY_THROW(hicanns->disable(hi));
+	ASSERT_ANY_THROW(hslinks->disable(hi));
 }
 
-TEST_F(AFpga, CanIntegrateDisabledHicanns) {
-	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+TEST_F(AFpga, CanIntegrateDisabledHighspeedLinks) {
+	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
 
-	auto hicanns = fpga.hicanns();
-	for (auto it=hicanns->begin_disabled(); it!=hicanns->end_disabled(); ++it) {
-		FAIL() << "No HICANNs should be disabled";
+	auto hslinks = fpga.hslinks();
+	for (auto it=hslinks->begin_disabled(); it!=hslinks->end_disabled(); ++it) {
+		FAIL() << "No HighspeedLinks should be disabled";
 	}
 
-	hicanns->disable(absent);
-	ASSERT_FALSE(hicanns->has(absent));
-	for (auto it=hicanns->begin_disabled(); it!=hicanns->end_disabled(); ++it) {
+	hslinks->disable(absent);
+	ASSERT_FALSE(hslinks->has(absent));
+	for (auto it=hslinks->begin_disabled(); it!=hslinks->end_disabled(); ++it) {
 		ASSERT_EQ(absent, *it);
-		hicanns->enable(*it);
+		hslinks->enable(*it);
 	}
-	ASSERT_TRUE(hicanns->has(absent));
+	ASSERT_TRUE(hslinks->has(absent));
 
 }

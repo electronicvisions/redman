@@ -1,6 +1,7 @@
 #pragma once
 
 #include <boost/serialization/export.hpp>
+#include <boost/serialization/version.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "pywrap/compat/macros.hpp"
@@ -14,7 +15,7 @@ namespace halco {
 namespace hicann {
 namespace v2 {
 class FPGAGlobal;
-class HICANNOnHS;
+class HighspeedLinkOnDNC;
 }
 }
 }
@@ -22,7 +23,7 @@ class HICANNOnHS;
 namespace HMF {
 namespace Coordinate {
 using halco::hicann::v2::FPGAGlobal;
-using halco::hicann::v2::HICANNOnHS;
+using halco::hicann::v2::HighspeedLinkOnDNC;
 }
 }
 
@@ -37,10 +38,10 @@ public:
 
 	/** HICANNs where the highspeed communication channel can be used
 	 */
-	boost::shared_ptr<components::HicannsOnHS> hicanns();
+	boost::shared_ptr<components::HighspeedLinksOnDNC> hslinks();
 
 #ifndef PYPLUSPLUS
-	boost::shared_ptr<components::HicannsOnHS const> hicanns() const;
+	boost::shared_ptr<components::HighspeedLinksOnDNC const> hslinks() const;
 #endif // PYPLUSPLUS
 
 	void copy(Base const&) PYPP_OVERRIDE;
@@ -49,11 +50,11 @@ public:
 	static boost::shared_ptr<Fpga> create();
 
 private:
-	boost::shared_ptr<components::HicannsOnHS> mHicanns;
+	boost::shared_ptr<components::HighspeedLinksOnDNC> mHSLinks;
 
 	friend class boost::serialization::access;
 	template<typename Archiver>
-	void serialize(Archiver& ar, unsigned int const);
+	void serialize(Archiver& ar, unsigned int const version);
 };
 
 class FpgaWithBackend : public Fpga
@@ -101,3 +102,5 @@ private:
 
 BOOST_CLASS_EXPORT_KEY(redman::resources::Fpga)
 BOOST_CLASS_EXPORT_KEY(redman::resources::FpgaWithBackend)
+
+BOOST_CLASS_VERSION(redman::resources::Fpga, 1)

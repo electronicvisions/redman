@@ -104,16 +104,16 @@ TYPED_TEST(AWaferWithBackend, LoadsFpgas) {
 	boost::shared_ptr<Fpga> fpga = wafer.get(hi);
 	ASSERT_TRUE(static_cast<bool>(fpga));
 
-	boost::shared_ptr<components::HicannsOnHS> hicanns = fpga->hicanns();
-	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
+	boost::shared_ptr<components::HighspeedLinksOnDNC> hslinks = fpga->hslinks();
+	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
 
-	if (hicanns->has(absent))
-		hicanns->disable(absent);
+	if (hslinks->has(absent))
+		hslinks->disable(absent);
 
 	// Fpgas are cached / lazy-loaded
 
 	boost::shared_ptr<const Fpga> cfpga = wafer.get(hi);
-	auto const& chicanns = cfpga->hicanns();
+	auto const& chicanns = cfpga->hslinks();
 	ASSERT_FALSE(chicanns->has(absent));
 }
 
@@ -134,11 +134,11 @@ TYPED_TEST(AWaferWithBackend, AllowsToInjectFpgaResources) {
 	auto& wafer = TestFixture::wafer;
 
 	boost::shared_ptr<Fpga> fpga = boost::make_shared<Fpga>();
-	auto absent = HMF::Coordinate::HICANNOnHS(geometry::Enum(5));
-	fpga->hicanns()->disable(absent);
+	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	fpga->hslinks()->disable(absent);
 
 	HMFC::FPGAOnWafer hi;
 	wafer.inject(hi, fpga);
 	auto loaded = wafer.get(hi);
-	ASSERT_FALSE(loaded->hicanns()->has(absent));
+	ASSERT_FALSE(loaded->hslinks()->has(absent));
 }

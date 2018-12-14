@@ -13,18 +13,18 @@
 namespace redman {
 namespace resources {
 
-Fpga::Fpga() : mHicanns(boost::make_shared<components::HicannsOnHS>()) {}
+Fpga::Fpga() : mHSLinks(boost::make_shared<components::HighspeedLinksOnDNC>()) {}
 
 Fpga::~Fpga() {}
 
-boost::shared_ptr<components::HicannsOnHS> Fpga::hicanns()
+boost::shared_ptr<components::HighspeedLinksOnDNC> Fpga::hslinks()
 {
-	return mHicanns;
+	return mHSLinks;
 }
 
-boost::shared_ptr<components::HicannsOnHS const> Fpga::hicanns() const
+boost::shared_ptr<components::HighspeedLinksOnDNC const> Fpga::hslinks() const
 {
-	return mHicanns;
+	return mHSLinks;
 }
 
 void Fpga::copy(Base const& rhs)
@@ -89,12 +89,18 @@ boost::shared_ptr<FpgaWithBackend> FpgaWithBackend::create(
 }
 
 template<typename Archiver>
-void Fpga::serialize(Archiver& ar, unsigned int const)
+void Fpga::serialize(Archiver& ar, unsigned int const version)
 {
 	using namespace boost::serialization;
 	ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Base);
 
-	ar& make_nvp("hicanns", mHicanns);
+	if (version < 1) {
+		throw std::runtime_error(
+		    "redman::resources::Fpga: (de)serialization of version " + std::to_string(version) +
+		    " not supported.");
+	}
+
+	ar& make_nvp("hslinks", mHSLinks);
 }
 
 template<typename Archiver>
