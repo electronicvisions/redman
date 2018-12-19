@@ -41,27 +41,30 @@ def configure(cfg):
 def build(bld):
     recurse(bld)
 
-    bld(
-        target       = '_pyredman',
-        features     = 'cxx cxxshlib pyext pyembed pypp',
-        source       = bld.path.ant_glob('*.cpp'),
-        install_path = '${PREFIX}/lib',
-        use          = [
-            'BOOST4PYREDMAN',
-            'redman',
-            'Coordinate',
-        ],
-        headers      = 'bindings.h',
-        gen_defines  = 'PYPLUSPLUS __STRICT_ANSI__',
-        script       = 'generate.py',
-        output_dir   = 'redman_bindings'
-    )
+    # set by pywrap's wscripts
+    if bld.env.build_python_bindings:
 
-    bld(
-        target          = 'pyredman',
-        features        = 'use py',
-        use             = '_pyredman',
-        source          = bld.path.ant_glob('pyredman/**/*.py'),
-        install_from    = 'pyredman',
-        install_path    = '${PREFIX}/lib/pyredman'
-    )
+        bld(
+            target       = '_pyredman',
+            features     = 'cxx cxxshlib pyext pyembed pypp',
+            source       = bld.path.ant_glob('*.cpp'),
+            install_path = '${PREFIX}/lib',
+            use          = [
+                'BOOST4PYREDMAN',
+                'redman',
+                'Coordinate',
+            ],
+            headers      = 'bindings.h',
+            gen_defines  = 'PYPLUSPLUS __STRICT_ANSI__',
+            script       = 'generate.py',
+            output_dir   = 'redman_bindings'
+        )
+
+        bld(
+            target          = 'pyredman',
+            features        = 'use py',
+            use             = '_pyredman',
+            source          = bld.path.ant_glob('pyredman/**/*.py'),
+            install_from    = 'pyredman',
+            install_path    = '${PREFIX}/lib/pyredman'
+        )

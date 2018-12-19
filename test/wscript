@@ -37,14 +37,15 @@ def build(bld):
         use             = ['redman'] + bindings,
     )
 
-    bld(tests           = [
-            'pyredmantest.py',
-            'pyredmanimporttest.py',
-            ],
-        target          = 'pyredman_tests',
-        features        = 'pytest',
-        use             = [ 'pyhalbe', 'pyredman' ] + bindings,
-        install_path    = os.path.join('bin', 'tests'))
+    if bld.env.build_python_bindings:
+        bld(tests           = [
+                'pyredmantest.py',
+                'pyredmanimporttest.py',
+                ],
+            target          = 'pyredman_tests',
+            features        = 'pytest',
+            use             = [ 'pyhalbe', 'pyredman' ] + bindings,
+            install_path    = os.path.join('bin', 'tests'))
 
     datadirsrc = bld.path.find_dir('share')
     bld.install_files(
