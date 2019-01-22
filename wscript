@@ -17,13 +17,13 @@ def options(opt):
     recurse(opt)
     opt.load('compiler_cxx')
     opt.load('boost')
-    opt.load('documentation')
+    opt.load('doxygen')
 
 def configure(cfg):
     recurse(cfg)
     cfg.load('compiler_cxx')
     cfg.load('boost')
-    cfg.load('documentation')
+    cfg.load('doxygen')
 
     cfg.check_boost(
             lib='filesystem serialization system',
@@ -90,4 +90,5 @@ def build(bld):
 def doc(dox):
     dox(features  = 'doxygen',
         doxyfile  = 'doc/Doxyfile',
-        doxyinput = ['redman'])
+        pars={ 'INPUT': "%s/include/redman %s/src" % tuple(dox.path.get_src().abspath() for i in range(2))}
+    )
