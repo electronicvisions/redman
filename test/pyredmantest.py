@@ -106,6 +106,30 @@ class BackendTests(object):
         self.assertFalse(wafer_with_backend_v1.hicanns().has_value())
         self.assertFalse(wafer_with_backend_v1.fpgas().has_value())
 
+        hicann_with_backend_v3 = load.HicannWithBackend("share/redman/fake_blacklisting/v3/",
+                                                        HICANNGlobal(), ignore_missing=False)
+
+        self.assertFalse(hicann_with_backend_v3.neurons().has_value())
+        self.assertFalse(hicann_with_backend_v3.synapses().has_value())
+        self.assertFalse(hicann_with_backend_v3.drivers().has_value())
+        self.assertFalse(hicann_with_backend_v3.synaptic_inputs().has_value())
+        self.assertFalse(hicann_with_backend_v3.hbuses().has_value())
+        self.assertFalse(hicann_with_backend_v3.vbuses().has_value())
+        self.assertFalse(hicann_with_backend_v3.mergers0().has_value())
+        self.assertFalse(hicann_with_backend_v3.mergers1().has_value())
+        self.assertFalse(hicann_with_backend_v3.mergers2().has_value())
+        self.assertFalse(hicann_with_backend_v3.mergers3().has_value())
+        self.assertFalse(hicann_with_backend_v3.dncmergers().has_value())
+        self.assertFalse(hicann_with_backend_v3.synapserows().has_value())
+        self.assertFalse(hicann_with_backend_v3.analogs().has_value())
+        self.assertFalse(hicann_with_backend_v3.backgroundgenerators().has_value())
+        self.assertFalse(hicann_with_backend_v3.fgblocks().has_value())
+        self.assertFalse(hicann_with_backend_v3.vrepeaters().has_value())
+        self.assertFalse(hicann_with_backend_v3.hrepeaters().has_value())
+        self.assertFalse(hicann_with_backend_v3.synapseswitches().has_value())
+        self.assertFalse(hicann_with_backend_v3.crossbarswitches().has_value())
+        self.assertFalse(hicann_with_backend_v3.synapseswitchrows().has_value())
+
 class TestXMLBackend(BackendTests, unittest.TestCase):
     def setUp(self):
         basedir = tempfile.mkdtemp()

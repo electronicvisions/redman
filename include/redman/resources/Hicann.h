@@ -24,6 +24,15 @@ public:
 	boost::shared_ptr<components::Synapses>       synapses()       { return mSynapses; }
 	boost::shared_ptr<components::SynapseDrivers> drivers()        { return mDrivers; }
 	boost::shared_ptr<components::SynapticInputs> synaptic_inputs() { return mSynapticInputs; }
+	boost::shared_ptr<components::SynapseRows>       synapserows()       { return mSynapseRows; }
+	boost::shared_ptr<components::Analogs>           analogs()           { return mAnalogs; }
+	boost::shared_ptr<components::BackgroundGenerators> backgroundgenerators() { return mBackgroundGenerators; }
+	boost::shared_ptr<components::FGBlocks>          fgblocks()          { return mFGBlocks; }
+	boost::shared_ptr<components::VRepeaters>        vrepeaters()        { return mVRepeaters; }
+	boost::shared_ptr<components::HRepeaters>        hrepeaters()        { return mHRepeaters; }
+	boost::shared_ptr<components::SynapseSwitches>    synapseswitches()    { return mSynapseSwitches; }
+	boost::shared_ptr<components::CrossbarSwitches>   crossbarswitches()   { return mCrossbarSwitches; }
+	boost::shared_ptr<components::SynapseSwitchRows> synapseswitchrows() { return mSynapseSwitchRows; }
 
 	boost::shared_ptr<components::HorizontalBuses> hbuses()        { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses>   vbuses()        { return mVBuses; }
@@ -39,6 +48,15 @@ public:
 	boost::shared_ptr<components::Synapses const>       synapses() const { return mSynapses; }
 	boost::shared_ptr<components::SynapseDrivers const> drivers()  const { return mDrivers; }
 	boost::shared_ptr<components::SynapticInputs const> synaptic_inputs() const { return mSynapticInputs; }
+	boost::shared_ptr<components::SynapseRows const>       synapserows()       const { return mSynapseRows; }
+	boost::shared_ptr<components::Analogs const>           analogs()           const { return mAnalogs; }
+	boost::shared_ptr<components::BackgroundGenerators const> backgroundgenerators() const { return mBackgroundGenerators; }
+	boost::shared_ptr<components::FGBlocks const>          fgblocks()          const { return mFGBlocks; }
+	boost::shared_ptr<components::VRepeaters const>        vrepeaters()        const { return mVRepeaters; }
+	boost::shared_ptr<components::HRepeaters const>        hrepeaters()        const { return mHRepeaters; }
+	boost::shared_ptr<components::SynapseSwitches const>    synapseswitches()    const { return mSynapseSwitches; }
+	boost::shared_ptr<components::CrossbarSwitches const>   crossbarswitches()   const { return mCrossbarSwitches; }
+	boost::shared_ptr<components::SynapseSwitchRows const> synapseswitchrows() const { return mSynapseSwitchRows; }
 
 	boost::shared_ptr<components::HorizontalBuses const> hbuses() const { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses const>   vbuses() const { return mVBuses; }
@@ -62,6 +80,15 @@ private:
 	boost::shared_ptr<components::Synapses> mSynapses;
 	boost::shared_ptr<components::SynapseDrivers> mDrivers;
 	boost::shared_ptr<components::SynapticInputs> mSynapticInputs;
+	boost::shared_ptr<components::SynapseRows> mSynapseRows;
+	boost::shared_ptr<components::Analogs> mAnalogs;
+	boost::shared_ptr<components::BackgroundGenerators> mBackgroundGenerators;
+	boost::shared_ptr<components::FGBlocks> mFGBlocks;
+	boost::shared_ptr<components::VRepeaters> mVRepeaters;
+	boost::shared_ptr<components::HRepeaters> mHRepeaters;
+	boost::shared_ptr<components::SynapseSwitches> mSynapseSwitches;
+	boost::shared_ptr<components::CrossbarSwitches> mCrossbarSwitches;
+	boost::shared_ptr<components::SynapseSwitchRows> mSynapseSwitchRows;
 
 	boost::shared_ptr<components::HorizontalBuses> mHBuses;
 	boost::shared_ptr<components::VerticalBuses> mVBuses;
@@ -145,6 +172,17 @@ void Hicann::serialize(Archiver& ar, unsigned int const version)
 	ar & make_nvp("merger2", mMergers2);
 	ar & make_nvp("merger3", mMergers3);
 	ar & make_nvp("dnc_merger", mDNCMergers);
+	if (version > 1) {
+		ar & make_nvp("synapserows", mSynapseRows);
+		ar & make_nvp("analogs", mAnalogs);
+		ar & make_nvp("backgroundgenerators", mBackgroundGenerators);
+		ar & make_nvp("fgblocks", mFGBlocks);
+		ar & make_nvp("vrepeaters", mVRepeaters);
+		ar & make_nvp("hrepeaters", mHRepeaters);
+		ar & make_nvp("synapseswitches", mSynapseSwitches);
+		ar & make_nvp("crossbarswitches", mCrossbarSwitches);
+		ar & make_nvp("synapseswitchrows", mSynapseSwitchRows);
+	}
 }
 
 template <typename Archiver>
@@ -161,4 +199,4 @@ void HicannWithBackend::serialize(Archiver& ar, unsigned int const version)
 } // redman
 
 BOOST_CLASS_VERSION(redman::resources::HicannWithBackend, 1)
-BOOST_CLASS_VERSION(redman::resources::Hicann, 1)
+BOOST_CLASS_VERSION(redman::resources::Hicann, 2)
