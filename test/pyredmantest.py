@@ -103,8 +103,8 @@ class BackendTests(object):
         wafer_with_backend_v2 = load.WaferWithBackend("share/redman/fake_blacklisting/v2/",
                                                       Wafer(), ignore_missing=False)
 
-        self.assertFalse(wafer_with_backend_v1.hicanns().has_value())
-        self.assertFalse(wafer_with_backend_v1.fpgas().has_value())
+        self.assertFalse(wafer_with_backend_v2.hicanns().has_value())
+        self.assertFalse(wafer_with_backend_v2.fpgas().has_value())
 
         hicann_with_backend_v3 = load.HicannWithBackend("share/redman/fake_blacklisting/v3/",
                                                         HICANNGlobal(), ignore_missing=False)
