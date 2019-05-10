@@ -17,6 +17,10 @@ Fpga::Fpga() : mHSLinks(boost::make_shared<components::HighspeedLinksOnDNC>()) {
 
 Fpga::~Fpga() {}
 
+void Fpga::intersection(Fpga const& other) {
+	hslinks()->intersection(*other.hslinks());
+}
+
 boost::shared_ptr<components::HighspeedLinksOnDNC> Fpga::hslinks()
 {
 	return mHSLinks;

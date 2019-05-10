@@ -143,3 +143,22 @@ TEST_F(AFpga, CanIntegrateDisabledHighspeedLinks) {
 	ASSERT_TRUE(hslinks->has(absent));
 
 }
+
+TEST(IntersectionTest, IntersectionWorks) {
+	Hicann hicann_a;
+	Hicann hicann_b;
+
+	HMFC::NeuronOnHICANN const nrn_0(HMFC::Enum(0));
+	HMFC::NeuronOnHICANN const nrn_1(HMFC::Enum(1));
+
+	hicann_a.neurons()->disable(nrn_0);
+	hicann_b.neurons()->disable(nrn_1);
+
+	ASSERT_FALSE(hicann_a.neurons()->has(nrn_0));
+	ASSERT_TRUE(hicann_a.neurons()->has(nrn_1));
+
+	hicann_a.intersection(hicann_b);
+
+	ASSERT_FALSE(hicann_a.neurons()->has(nrn_0));
+	ASSERT_FALSE(hicann_a.neurons()->has(nrn_1));
+}

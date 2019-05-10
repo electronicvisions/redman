@@ -90,6 +90,10 @@ public:
 	 */
 	void save();
 
+	/** Perform intersection for all components
+	 */
+	void intersection(Wafer const& other);
+
 #ifndef PYPLUSPLUS
 	boost::shared_ptr<components::Hicanns const> hicanns() const;
 	boost::shared_ptr<components::Fpgas const> fpgas() const;

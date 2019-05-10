@@ -31,6 +31,31 @@ Hicann::Hicann()
 Hicann::~Hicann() {
 }
 
+void Hicann::intersection(Hicann const& other) {
+	neurons()->intersection(*other.neurons());
+	synapses()->intersection(*other.synapses());
+	drivers()->intersection(*other.drivers());
+	synaptic_inputs()->intersection(*other.synaptic_inputs());
+	synapserows()->intersection(*other.synapserows());
+	analogs()->intersection(*other.analogs());
+	backgroundgenerators()->intersection(*other.backgroundgenerators());
+	fgblocks()->intersection(*other.fgblocks());
+	vrepeaters()->intersection(*other.vrepeaters());
+	hrepeaters()->intersection(*other.hrepeaters());
+	synapseswitches()->intersection(*other.synapseswitches());
+	crossbarswitches()->intersection(*other.crossbarswitches());
+	synapseswitchrows()->intersection(*other.synapseswitchrows());
+
+	hbuses()->intersection(*other.hbuses());
+	vbuses()->intersection(*other.vbuses());
+
+	mergers0()->intersection(*other.mergers0());
+	mergers1()->intersection(*other.mergers1());
+	mergers2()->intersection(*other.mergers2());
+	mergers3()->intersection(*other.mergers3());
+	dncmergers()->intersection(*other.dncmergers());
+}
+
 void Hicann::copy(Base const& rhs) {
 	*this = dynamic_cast<Hicann const&>(rhs);
 }

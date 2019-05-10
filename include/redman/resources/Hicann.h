@@ -43,6 +43,10 @@ public:
 	boost::shared_ptr<components::Mergers3>        mergers3()      { return mMergers3; }
 	boost::shared_ptr<components::DNCMergers>      dncmergers()    { return mDNCMergers; }
 
+	/** Perform intersection for all components
+	 */
+	void intersection(Hicann const& other);
+
 #ifndef PYPLUSPLUS
 	boost::shared_ptr<components::Neurons const>        neurons()  const { return mNeurons; }
 	boost::shared_ptr<components::Synapses const>       synapses() const { return mSynapses; }

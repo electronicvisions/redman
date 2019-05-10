@@ -44,6 +44,10 @@ public:
 	boost::shared_ptr<components::HighspeedLinksOnDNC const> hslinks() const;
 #endif // PYPLUSPLUS
 
+	/** Perform intersection for all components
+	 */
+	void intersection(Fpga const& other);
+
 	void copy(Base const&) PYPP_OVERRIDE;
 
 	// factory function for Py++

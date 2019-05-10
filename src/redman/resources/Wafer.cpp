@@ -26,6 +26,11 @@ void Wafer::set_id(id_type const& id)
 	mId = id;
 }
 
+void Wafer::intersection(Wafer const& other) {
+	hicanns()->intersection(*other.hicanns());
+	fpgas()->intersection(*other.fpgas());
+}
+
 void Wafer::copy(Base const& rhs) {
 	// copy used when loading via backend, need to manually
 	// restore backend we don't want to serialize it
