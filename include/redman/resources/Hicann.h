@@ -141,13 +141,17 @@ void Hicann::serialize(Archiver& ar, unsigned int const)
 	ar & make_nvp("dnc_merger", mDNCMergers);
 }
 
-template<typename Archiver>
-void HicannWithBackend::serialize(Archiver& ar, unsigned int const)
+template <typename Archiver>
+void HicannWithBackend::serialize(Archiver& ar, unsigned int const version)
 {
+	using namespace boost::serialization;
 	ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Hicann);
-	// Do not add further serialization here!
-	// This class is only a shim to encapsulate communication with the backend.
+	if (version > 0) {
+		ar & make_nvp("id", mId);
+	}
 }
 
 } // resources
 } // redman
+
+BOOST_CLASS_VERSION(redman::resources::HicannWithBackend, 1)

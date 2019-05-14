@@ -88,7 +88,7 @@ public:
 private:
 	void load(bool ignore_missing);
 
-	id_type const mId;
+	id_type mId;
 	boost::shared_ptr<backend::Backend> mBackend;
 
 	friend class boost::serialization::access;
@@ -104,3 +104,4 @@ BOOST_CLASS_EXPORT_KEY(redman::resources::Fpga)
 BOOST_CLASS_EXPORT_KEY(redman::resources::FpgaWithBackend)
 
 BOOST_CLASS_VERSION(redman::resources::Fpga, 1)
+BOOST_CLASS_VERSION(redman::resources::FpgaWithBackend, 2)

@@ -154,14 +154,17 @@ void Wafer::serialize(Archiver& ar, unsigned int const version)
 }
 
 template<typename Archiver>
-void WaferWithBackend::serialize(Archiver& ar, unsigned int const)
+void WaferWithBackend::serialize(Archiver& ar, unsigned int const version)
 {
+	using namespace boost::serialization;
 	ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Wafer);
-	// Do not add further serialization here!
-	// This class is only a shim to encapsulate communication with the backend.
+	if (version > 0) {
+		ar & make_nvp("id", mId);
+	}
 }
 
 } // resources
 } // redman
 
 BOOST_CLASS_VERSION(redman::resources::Wafer, 2)
+BOOST_CLASS_VERSION(redman::resources::WaferWithBackend, 1)

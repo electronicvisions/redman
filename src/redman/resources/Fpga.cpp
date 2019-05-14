@@ -104,11 +104,13 @@ void Fpga::serialize(Archiver& ar, unsigned int const version)
 }
 
 template<typename Archiver>
-void FpgaWithBackend::serialize(Archiver& ar, unsigned int const)
+void FpgaWithBackend::serialize(Archiver& ar, unsigned int const version)
 {
+	using namespace boost::serialization;
 	ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Fpga);
-	// Do not add further serialization here!
-	// This class is only a shim to encapsulate communication with the backend.
+	if (version > 1) {
+		ar & make_nvp("id", mId);
+	}
 }
 
 } // resources
