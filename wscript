@@ -9,6 +9,8 @@ except ImportError:
     from symwaf2ic import recurse_depends
     recurse = lambda ctx: recurse_depends(depends, ctx)
 
+from waflib import Utils
+
 def depends(ctx):
     ctx('redman', 'test')  # build tests by default
     ctx('halbe')
@@ -86,6 +88,12 @@ def build(bld):
         **flags
     )
 
+    bld.install_files(
+        '${PREFIX}/bin',
+        bld.path.ant_glob('tools/*'),
+        relative_trick=False,
+        chmod=Utils.O755,
+    )
 
 def doc(dox):
     dox(features  = 'doxygen',
