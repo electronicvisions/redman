@@ -45,7 +45,7 @@ for c in redman.namespace('resources').classes():
 
     c.mem_funs('copy', allow_empty=True).exclude()
 
-    if not (c.name == 'Base' or c.name.startswith('ResourceWithFactory')):
+    if not (c.name == 'Base' or c.name.startswith('ResourceWithFactory') or "behavior" in c.name):
         create_factories(c)
 
 def renamed(scope, regex, repl):
