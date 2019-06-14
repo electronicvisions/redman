@@ -48,7 +48,7 @@ void XMLBackend::load(std::string const& id, Base& res)
 	namespace fs = boost::filesystem;
 	auto file = getFilename(id);
 	if (!fs::exists(file)) {
-		throw not_found_error("data set not found");
+		throw not_found_error("data set not found: " + file.native());
 	}
 
 	std::fstream stream(file.string(), std::ios::in | std::ios::binary);
