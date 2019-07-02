@@ -34,7 +34,6 @@ def configure(cfg):
     cfg.load('python')
     cfg.load('pytest')
     cfg.load('boost')
-    cfg.load('post_task')
 
     cfg.check_boost(lib='python serialization', uselib_store='BOOST4PYREDMAN')
 
@@ -44,7 +43,7 @@ def build(bld):
 
     bld(
         target       = '_pyredman',
-        features     = 'cxx cxxshlib pyext pyembed pypp post_task',
+        features     = 'cxx cxxshlib pyext pyembed pypp',
         source       = bld.path.ant_glob('*.cpp'),
         install_path = '${PREFIX}/lib',
         use          = [
@@ -55,15 +54,14 @@ def build(bld):
         headers      = 'bindings.h',
         gen_defines  = 'PYPLUSPLUS __STRICT_ANSI__',
         script       = 'generate.py',
-        output_dir   = 'redman_bindings',
-        post_task    = 'pyredman_tests',
+        output_dir   = 'redman_bindings'
     )
 
     bld(
         target          = 'pyredman',
-        features        = 'py post_task',
+        features        = 'use py',
+        use             = '_pyredman',
         source          = bld.path.ant_glob('pyredman/**/*.py'),
-        post_task       = ['_pyredman'],
         install_from    = 'pyredman',
         install_path    = '${PREFIX}/lib/pyredman'
     )
