@@ -23,6 +23,7 @@ public:
 	boost::shared_ptr<components::Neurons>        neurons()        { return mNeurons; }
 	boost::shared_ptr<components::Synapses>       synapses()       { return mSynapses; }
 	boost::shared_ptr<components::SynapseDrivers> drivers()        { return mDrivers; }
+	boost::shared_ptr<components::SynapticInputs> synaptic_inputs() { return mSynapticInputs; }
 
 	boost::shared_ptr<components::HorizontalBuses> hbuses()        { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses>   vbuses()        { return mVBuses; }
@@ -37,6 +38,7 @@ public:
 	boost::shared_ptr<components::Neurons const>        neurons()  const { return mNeurons; }
 	boost::shared_ptr<components::Synapses const>       synapses() const { return mSynapses; }
 	boost::shared_ptr<components::SynapseDrivers const> drivers()  const { return mDrivers; }
+	boost::shared_ptr<components::SynapticInputs const> synaptic_inputs() const { return mSynapticInputs; }
 
 	boost::shared_ptr<components::HorizontalBuses const> hbuses() const { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses const>   vbuses() const { return mVBuses; }
@@ -59,6 +61,7 @@ private:
 	boost::shared_ptr<components::Neurons> mNeurons;
 	boost::shared_ptr<components::Synapses> mSynapses;
 	boost::shared_ptr<components::SynapseDrivers> mDrivers;
+	boost::shared_ptr<components::SynapticInputs> mSynapticInputs;
 
 	boost::shared_ptr<components::HorizontalBuses> mHBuses;
 	boost::shared_ptr<components::VerticalBuses> mVBuses;
@@ -122,7 +125,7 @@ namespace redman {
 namespace resources {
 
 template<typename Archiver>
-void Hicann::serialize(Archiver& ar, unsigned int const)
+void Hicann::serialize(Archiver& ar, unsigned int const version)
 {
 	using namespace boost::serialization;
 	ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Base);
@@ -130,6 +133,9 @@ void Hicann::serialize(Archiver& ar, unsigned int const)
 	ar & make_nvp("neurons", mNeurons);
 	ar & make_nvp("synapses", mSynapses);
 	ar & make_nvp("drivers", mDrivers);
+	if (version > 0) {
+		ar & make_nvp("synaptic_inputs", mSynapticInputs);
+	}
 
 	ar & make_nvp("hbuses", mHBuses);
 	ar & make_nvp("vbuses", mVBuses);
@@ -155,3 +161,4 @@ void HicannWithBackend::serialize(Archiver& ar, unsigned int const version)
 } // redman
 
 BOOST_CLASS_VERSION(redman::resources::HicannWithBackend, 1)
+BOOST_CLASS_VERSION(redman::resources::Hicann, 1)

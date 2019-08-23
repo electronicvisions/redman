@@ -51,6 +51,7 @@ ADD_RESOURCE(Neurons, HMF::Coordinate::NeuronOnHICANN, 1)
 
 ADD_RESOURCE(Synapses, HMF::Coordinate::SynapseOnHICANN, 1)
 ADD_RESOURCE(SynapseDrivers, HMF::Coordinate::SynapseDriverOnHICANN, 1)
+ADD_RESOURCE(SynapticInputs, HMF::Coordinate::SynapticInputOnHICANN, 1)
 
 ADD_RESOURCE(HorizontalBuses, HMF::Coordinate::HLineOnHICANN, 1)
 ADD_RESOURCE(VerticalBuses, HMF::Coordinate::VLineOnHICANN, 1)

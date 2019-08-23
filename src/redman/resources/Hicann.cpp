@@ -9,6 +9,7 @@ Hicann::Hicann()
     : mNeurons(boost::make_shared<components::Neurons>()),
       mSynapses(boost::make_shared<components::Synapses>()),
       mDrivers(boost::make_shared<components::SynapseDrivers>()),
+      mSynapticInputs(boost::make_shared<components::SynapticInputs>()),
       mHBuses(boost::make_shared<components::HorizontalBuses>()),
       mVBuses(boost::make_shared<components::VerticalBuses>()),
       mMergers0(boost::make_shared<components::Mergers0>()),
