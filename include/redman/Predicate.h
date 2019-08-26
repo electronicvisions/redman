@@ -7,6 +7,7 @@
 #endif // PYPLUSPLUS
 
 #include <boost/utility/enable_if.hpp>
+#include <boost/type_traits.hpp>
 #include <boost/type_traits/is_unsigned.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/serialization/serialization.hpp>
@@ -19,19 +20,18 @@ struct Predicate
 
 namespace detail {
 
+template <typename T, typename = void>
+struct HasEnumType : boost::false_type {};
+
 template <typename T>
-struct void_type {
-    typedef void type;
-};
+struct HasEnumType <T, typename boost::enable_if_has_type<typename T::enum_type>::type> : boost::true_type {};
 
-}
+} // namespace detail
 
+
+// If Resource::enum_type does not exist we use the Resource directly as index_type
 template<typename Resource, typename Enable = void>
-struct DefaultPredicate;
-
-template<typename Resource>
-struct DefaultPredicate<Resource, typename detail::void_type<typename Resource::value_type>::type>
-	: public Predicate
+struct DefaultPredicate : public Predicate
 {
 	typedef Resource resource_type;
 	typedef resource_type index_type;
@@ -48,8 +48,9 @@ struct DefaultPredicate<Resource, typename detail::void_type<typename Resource::
 	}
 };
 
+// Otherwise we use enum_type as index_type
 template<typename Resource>
-struct DefaultPredicate<Resource, typename detail::void_type<typename Resource::enum_type>::type>
+struct DefaultPredicate<Resource, typename boost::enable_if_c<detail::HasEnumType<Resource>::value>::type>
 	: public Predicate
 {
 	typedef Resource resource_type;
