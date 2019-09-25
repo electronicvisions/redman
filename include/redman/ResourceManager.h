@@ -53,9 +53,9 @@ class ResourceManager
 
 public:
 	typedef std::set<Resource, Compare> set_type;
+	typedef Resource resource;
 
 #ifndef PYPLUSPLUS
-	typedef Resource resource;
 	typedef Policy policy;
 	typedef Predicate predicate;
 
