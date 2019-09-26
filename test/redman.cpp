@@ -88,11 +88,25 @@ TYPED_TEST(AManager, ThrowsWhenEnablingAResourceThatIsEnabled) {
 	ASSERT_ANY_THROW(manager.enable(8));
 }
 
-TYPED_TEST(AManager, ThrowsWhenDisablingAResourceThatIsEnabled) {
+TYPED_TEST(AManager, ThrowsWhenDisablingAResourceThatIsDisabled) {
 	auto& manager = TestFixture::manager;
 	manager.disable_all();
 
 	ASSERT_ANY_THROW(manager.disable(7));
+}
+
+TYPED_TEST(AManager, DoesNotThrowWhenForcingEnablingAResourceThatIsEnabled) {
+	auto& manager = TestFixture::manager;
+	manager.enable_all();
+
+	ASSERT_NO_THROW(manager.enable(8, switch_mode::NONTHROW));
+}
+
+TYPED_TEST(AManager, DoesNotThrowWhenForcingDisablingAResourceThatIsDisabled) {
+	auto& manager = TestFixture::manager;
+	manager.disable_all();
+
+	ASSERT_NO_THROW(manager.disable(7, switch_mode::NONTHROW));
 }
 
 TYPED_TEST(AManager, AllowsIterationOverEnabledResources) {

@@ -44,10 +44,10 @@ struct Whitelist :
 
 	template<typename Set>
 	static
-	void enable(Set& set, typename Set::const_reference val, bool force = false)
+	void enable(Set& set, typename Set::const_reference val, switch_mode::type mode = switch_mode::THROW)
 	{
 		std::pair<typename Set::iterator, bool> r = set.insert(val);
-		if (!force && !r.second) {
+		if ((mode == switch_mode::THROW) && !r.second) {
 			std::stringstream error_msg;
 			error_msg << "could not enable resource: " << val;
 			throw std::runtime_error(error_msg.str().c_str());
@@ -56,10 +56,11 @@ struct Whitelist :
 
 	template<typename Set>
 	static
-	void disable(Set& set, typename Set::const_reference val, bool force=false)
+	void disable(Set& set, typename Set::const_reference val, switch_mode::type mode = switch_mode::THROW)
 	{
 		typename Set::const_iterator it = set.find(val);
-		if (!force && (it == set.end())) {
+		if (it == set.end()) {
+			if (mode == switch_mode::NONTHROW) return;
 			std::stringstream error_msg;
 			error_msg << "could not disable resource: " << val;
 			throw std::runtime_error(error_msg.str().c_str());

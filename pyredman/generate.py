@@ -64,6 +64,8 @@ for c in itertools.chain(
     c.include()
     c.constructors().exclude()
 
+redman.class_('switch_mode').include()
+
 ns.include(mb, 'namespaces', ['::redman::backend'])
 
 ns.exclude(mb, 'namespaces', [

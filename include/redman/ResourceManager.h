@@ -111,17 +111,17 @@ public:
 	 *  \param  val The resource to enable.
 	 *  \throws std::invalid_argument When the resource does not
 	 *          fulfill the predicate.
-	 *  \throws std::invalid_argument When the resource is already enabled.
+	 *  \throws std::invalid_argument When the resource is already enabled and mode is THROW
 	 */
-	void enable(Resource const& val);
+	void enable(Resource const& val, switch_mode::type mode = switch_mode::THROW);
 
 	/** Disable the given resource.
 	 *  \param  val The resource to enable.
 	 *  \throws std::invalid_argument When the resource does not
 	 *          fulfill the predicate.
-	 *  \throws std::invalid_argument When the resource is already disabled.
+	 *  \throws std::invalid_argument When the resource is already disabled and mode is THROW
 	 */
-	void disable(Resource const& val, bool force=false);
+	void disable(Resource const& val, switch_mode::type mode = switch_mode::THROW);
 
 	/** Enable all resources.
 	 */
@@ -243,22 +243,22 @@ size_t ResourceManager<Res, Pol, Pred, Cmp>::available() const {
 }
 
 template<typename Res, typename Pol, typename Pred, typename Cmp>
-void ResourceManager<Res, Pol, Pred, Cmp>::enable(Res const& val) {
+void ResourceManager<Res, Pol, Pred, Cmp>::enable(Res const& val, switch_mode::type mode) {
 	if (!mPredicate(val))
 		throw std::invalid_argument(
 			"Resource rejected by predicate.");
 
-	Pol::enable(mSelection, val);
+	Pol::enable(mSelection, val, mode);
 	mHasValue = true;
 }
 
 template<typename Res, typename Pol, typename Pred, typename Cmp>
-void ResourceManager<Res, Pol, Pred, Cmp>::disable(Res const& val, bool force) {
+void ResourceManager<Res, Pol, Pred, Cmp>::disable(Res const& val, switch_mode::type mode) {
 	if (!mPredicate(val))
 		throw std::invalid_argument(
 			"Resource rejected by predicate.");
 
-	Pol::disable(mSelection, val, force);
+	Pol::disable(mSelection, val, mode);
 	mHasValue = true;
 }
 
