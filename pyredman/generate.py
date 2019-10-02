@@ -48,6 +48,11 @@ for c in redman.namespace('resources').classes():
     if not (c.name == 'Base' or c.name.startswith('ResourceWithFactory') or "behavior" in c.name):
         create_factories(c)
 
+for cls in ['Wafer', 'Fpga', 'Hicann', 'WaferWithBackend', 'FpgaWithBackend', 'HicannWithBackend']:
+    c = redman.class_(cls)
+    pywrap.classes.add_pickle_suite(c)
+    pywrap.classes.add_comparison_operators(c)
+
 def renamed(scope, regex, repl):
     regex = re.compile(regex)
     sanitize = lambda s: re.sub(r'\W+', '', s)

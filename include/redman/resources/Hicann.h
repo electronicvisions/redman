@@ -106,6 +106,9 @@ private:
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver& ar, unsigned int const);
+
+	friend bool operator==(Hicann const& a, Hicann const& b);
+	friend bool operator!=(Hicann const& a, Hicann const& b);
 };
 
 class HicannWithBackend : public Hicann {
@@ -204,3 +207,7 @@ void HicannWithBackend::serialize(Archiver& ar, unsigned int const version)
 
 BOOST_CLASS_VERSION(redman::resources::HicannWithBackend, 1)
 BOOST_CLASS_VERSION(redman::resources::Hicann, 2)
+
+BOOST_CLASS_TRACKING(redman::resources::Hicann, boost::serialization::track_always)
+BOOST_CLASS_TRACKING(redman::resources::HicannWithBackend, boost::serialization::track_always)
+

@@ -6,6 +6,9 @@
 #include "redman/backend/Library.h"
 #include "redman/backend/BackendDeleter.h"
 
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/variant.hpp>
+#include <boost/serialization/map.hpp>
 
 namespace redman {
 namespace backend {
@@ -79,5 +82,27 @@ loadBackend(boost::shared_ptr<Library> lib)
 	return boost::shared_ptr<Backend>(backend, BackendDeleter(lib));
 }
 
+bool operator==(Backend const& a, Backend const& b)
+{
+	return a.mConfig == b.mConfig;
+}
+
+bool operator!=(Backend const& a, Backend const& b)
+{
+	return !(a == b);
+}
+
+template <typename Archiver>
+void Backend::serialize(Archiver& ar, unsigned int const)
+{
+	using namespace boost::serialization;
+	ar& make_nvp("config", mConfig);
+}
+
 } // backend
 } // redman
+
+BOOST_CLASS_EXPORT_IMPLEMENT(redman::backend::Backend)
+
+#include "boost/serialization/serialization_helper.tcc"
+EXPLICIT_INSTANTIATE_BOOST_SERIALIZE(redman::backend::Backend)

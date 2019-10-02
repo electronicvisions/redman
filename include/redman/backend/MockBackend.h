@@ -4,6 +4,8 @@
 #include <sstream>
 #include <unordered_map>
 
+#include <boost/serialization/export.hpp>
+
 #include "redman/backend/Backend.h"
 
 namespace redman {
@@ -22,7 +24,14 @@ public:
 
 private:
 	std::unordered_map<std::string, std::string> mStore;
+
+	friend class boost::serialization::access;
+	template<typename Archiver>
+	void serialize(Archiver& ar, unsigned int const);
+
 };
 
 } // backend
 } // redman
+
+BOOST_CLASS_EXPORT_KEY(redman::backend::MockBackend)

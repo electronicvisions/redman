@@ -206,5 +206,33 @@ boost::shared_ptr<WaferWithBackend> WaferWithBackend::create(
 WaferWithBackend::~WaferWithBackend() {
 }
 
-} //resources
+bool operator==(Wafer const& a, Wafer const& b)
+{
+	if (static_cast<bool>(a.mHicanns) != static_cast<bool>(b.mHicanns)) {
+		return false;
+	} else if (static_cast<bool>(a.mHicanns) && ((*a.mHicanns) != (*b.mHicanns))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mFpgas) != static_cast<bool>(b.mFpgas)) {
+		return false;
+	} else if (static_cast<bool>(a.mFpgas) && ((*a.mFpgas) != (*b.mFpgas))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mBackend) != static_cast<bool>(b.mBackend)) {
+		return false;
+	} else if (static_cast<bool>(a.mBackend) && ((*a.mBackend) != (*b.mBackend))) {
+		return false;
+	}
+
+	return true;
+}
+
+bool operator!=(Wafer const& a, Wafer const& b)
+{
+	return !(a == b);
+}
+
+} // resources
 } // redman

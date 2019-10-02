@@ -59,6 +59,9 @@ private:
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver& ar, unsigned int const version);
+
+	friend bool operator==(Fpga const& a, Fpga const& b);
+	friend bool operator!=(Fpga const& a, Fpga const& b);
 };
 
 class FpgaWithBackend : public Fpga
@@ -109,3 +112,6 @@ BOOST_CLASS_EXPORT_KEY(redman::resources::FpgaWithBackend)
 
 BOOST_CLASS_VERSION(redman::resources::Fpga, 1)
 BOOST_CLASS_VERSION(redman::resources::FpgaWithBackend, 2)
+
+BOOST_CLASS_TRACKING(redman::resources::Fpga, boost::serialization::track_always)
+BOOST_CLASS_TRACKING(redman::resources::FpgaWithBackend, boost::serialization::track_always)

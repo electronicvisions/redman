@@ -1,5 +1,7 @@
 #pragma once
 
+#include <boost/serialization/export.hpp>
+
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/filesystem.hpp>
@@ -34,7 +36,13 @@ private:
 	path getFilename(std::string const& id) const;
 
 	path  mPath;
+
+	friend class boost::serialization::access;
+	template<typename Archiver>
+	void serialize(Archiver& ar, unsigned int const);
 };
 
 } // backend
 } // redman
+
+BOOST_CLASS_EXPORT_KEY(redman::backend::XMLBackend)

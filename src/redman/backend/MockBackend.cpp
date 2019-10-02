@@ -8,6 +8,9 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/unordered_map.hpp>
+
 using namespace redman::resources;
 
 namespace redman {
@@ -38,5 +41,18 @@ void MockBackend::store(std::string const& id, Base const& res) {
 		it.first->second = str;
 }
 
+template <typename Archiver>
+void MockBackend::serialize(Archiver& ar, unsigned int const)
+{
+	using boost::serialization::make_nvp;
+	ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Backend);
+	ar& make_nvp("store", mStore);
+}
+
 } // backend
 } // redman
+
+BOOST_CLASS_EXPORT_IMPLEMENT(redman::backend::MockBackend)
+
+#include "boost/serialization/serialization_helper.tcc"
+EXPLICIT_INSTANTIATE_BOOST_SERIALIZE(redman::backend::MockBackend)

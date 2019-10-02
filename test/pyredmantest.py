@@ -180,5 +180,63 @@ class TestPyRedman(unittest.TestCase):
         n2.reset()
         self.assertFalse(n2.has_value())
 
+class TestSerialization(unittest.TestCase):
+    def test_wafer_pickle(self):
+        import pickle
+        w = redman.Wafer()
+        w_str = pickle.dumps(w)
+        w2 = pickle.loads(w_str)
+        self.assertEqual(w, w2)
+        # change something to ensure that it's not a mere pointer copy
+        w.hicanns().disable(HICANNOnWafer())
+        self.assertNotEqual(w, w2)
+
+    def test_wafer_copy(self):
+        import copy
+        w = redman.Wafer()
+        w2 = copy.deepcopy(w)
+        self.assertEqual(w, w2)
+        # change something to ensure that it's not a mere pointer copy
+        w.hicanns().disable(HICANNOnWafer())
+        self.assertNotEqual(w, w2)
+
+    def test_hicann_pickle(self):
+        import pickle
+        h = redman.Hicann()
+        h_str = pickle.dumps(h)
+        h2 = pickle.loads(h_str)
+        self.assertEqual(h, h2)
+        # change something to ensure that it's not a mere pointer copy
+        h.neurons().disable(NeuronOnHICANN())
+        self.assertNotEqual(h, h2)
+
+    def test_hicann_copy(self):
+        import copy
+        h = redman.Hicann()
+        h2 = copy.deepcopy(h)
+        self.assertEqual(h, h2)
+        # change something to ensure that it's not a mere pointer copy
+        h.neurons().disable(NeuronOnHICANN())
+        self.assertNotEqual(h, h2)
+
+    def test_fpga_pickle(self):
+        import pickle
+        f = redman.Fpga()
+        f_str = pickle.dumps(f)
+        f2 = pickle.loads(f_str)
+        self.assertEqual(f, f2)
+        # change something to ensure that it's not a mere pointer copy
+        f.hslinks().disable(HighspeedLinkOnDNC())
+        self.assertNotEqual(f, f2)
+
+    def test_fpga_copy(self):
+        import copy
+        f = redman.Fpga()
+        f2 = copy.deepcopy(f)
+        self.assertEqual(f, f2)
+        # change something to ensure that it's not a mere pointer copy
+        f.hslinks().disable(HighspeedLinkOnDNC())
+        self.assertNotEqual(f, f2)
+
 if __name__ == '__main__':
     unittest.main()

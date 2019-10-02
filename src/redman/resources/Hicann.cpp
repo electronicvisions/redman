@@ -110,5 +110,142 @@ boost::shared_ptr<HicannWithBackend> HicannWithBackend::create(
 	return boost::make_shared<HicannWithBackend>(backend, id, Hicann(), ignore_missing);
 }
 
+bool operator==(Hicann const& a, Hicann const& b)
+{
+	if (static_cast<bool>(a.mNeurons) != static_cast<bool>(b.mNeurons)) {
+		return false;
+	} else if (static_cast<bool>(a.mNeurons) && ((*a.mNeurons) != (*b.mNeurons))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapses) != static_cast<bool>(b.mSynapses)) {
+		return false;
+	} else if (static_cast<bool>(a.mSynapses) && ((*a.mSynapses) != (*b.mSynapses))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mDrivers) != static_cast<bool>(b.mDrivers)) {
+		return false;
+	} else if (static_cast<bool>(a.mDrivers) && ((*a.mDrivers) != (*b.mDrivers))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapticInputs) != static_cast<bool>(b.mSynapticInputs)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mSynapticInputs) && ((*a.mSynapticInputs) != (*b.mSynapticInputs))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapseRows) != static_cast<bool>(b.mSynapseRows)) {
+		return false;
+	} else if (static_cast<bool>(a.mSynapseRows) && ((*a.mSynapseRows) != (*b.mSynapseRows))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mAnalogs) != static_cast<bool>(b.mAnalogs)) {
+		return false;
+	} else if (static_cast<bool>(a.mAnalogs) && ((*a.mAnalogs) != (*b.mAnalogs))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mBackgroundGenerators) != static_cast<bool>(b.mBackgroundGenerators)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mBackgroundGenerators) &&
+	    ((*a.mBackgroundGenerators) != (*b.mBackgroundGenerators))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mFGBlocks) != static_cast<bool>(b.mFGBlocks)) {
+		return false;
+	} else if (static_cast<bool>(a.mFGBlocks) && ((*a.mFGBlocks) != (*b.mFGBlocks))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mVRepeaters) != static_cast<bool>(b.mVRepeaters)) {
+		return false;
+	} else if (static_cast<bool>(a.mVRepeaters) && ((*a.mVRepeaters) != (*b.mVRepeaters))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mHRepeaters) != static_cast<bool>(b.mHRepeaters)) {
+		return false;
+	} else if (static_cast<bool>(a.mHRepeaters) && ((*a.mHRepeaters) != (*b.mHRepeaters))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapseSwitches) != static_cast<bool>(b.mSynapseSwitches)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mSynapseSwitches) && ((*a.mSynapseSwitches) != (*b.mSynapseSwitches))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mCrossbarSwitches) != static_cast<bool>(b.mCrossbarSwitches)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mCrossbarSwitches) &&
+	    ((*a.mCrossbarSwitches) != (*b.mCrossbarSwitches))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapseSwitchRows) != static_cast<bool>(b.mSynapseSwitchRows)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mSynapseSwitchRows) &&
+	    ((*a.mSynapseSwitchRows) != (*b.mSynapseSwitchRows))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mHBuses) != static_cast<bool>(b.mHBuses)) {
+		return false;
+	} else if (static_cast<bool>(a.mHBuses) && ((*a.mHBuses) != (*b.mHBuses))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mVBuses) != static_cast<bool>(b.mVBuses)) {
+		return false;
+	} else if (static_cast<bool>(a.mVBuses) && ((*a.mVBuses) != (*b.mVBuses))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mMergers0) != static_cast<bool>(b.mMergers0)) {
+		return false;
+	} else if (static_cast<bool>(a.mMergers0) && ((*a.mMergers0) != (*b.mMergers0))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mMergers1) != static_cast<bool>(b.mMergers1)) {
+		return false;
+	} else if (static_cast<bool>(a.mMergers1) && ((*a.mMergers1) != (*b.mMergers1))) {
+		return false;
+	}
+	if (static_cast<bool>(a.mMergers2) != static_cast<bool>(b.mMergers2)) {
+		return false;
+	} else if (static_cast<bool>(a.mMergers2) && ((*a.mMergers2) != (*b.mMergers2))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mMergers3) != static_cast<bool>(b.mMergers3)) {
+		return false;
+	} else if (static_cast<bool>(a.mMergers3) && ((*a.mMergers3) != (*b.mMergers3))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mDNCMergers) != static_cast<bool>(b.mDNCMergers)) {
+		return false;
+	} else if (static_cast<bool>(a.mDNCMergers) && ((*a.mDNCMergers) != (*b.mDNCMergers))) {
+		return false;
+	}
+
+	return true;
+}
+
+bool operator!=(Hicann const& a, Hicann const& b)
+{
+	return !(a == b);
+}
+
 } // resources
 } // redman

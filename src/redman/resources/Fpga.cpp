@@ -117,6 +117,21 @@ void FpgaWithBackend::serialize(Archiver& ar, unsigned int const version)
 	}
 }
 
+bool operator==(Fpga const& a, Fpga const& b)
+{
+	if (static_cast<bool>(a.mHSLinks) != static_cast<bool>(b.mHSLinks)) {
+		return false;
+	} else if (static_cast<bool>(a.mHSLinks) && ((*a.mHSLinks) != (*b.mHSLinks))) {
+		return false;
+	}
+	return true;
+}
+
+bool operator!=(Fpga const& a, Fpga const& b)
+{
+	return !(a == b);
+}
+
 } // resources
 } // redman
 

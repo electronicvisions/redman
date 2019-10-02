@@ -4,8 +4,13 @@
 #include <string>
 #include <map>
 
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/serialization.hpp>
+
 #include <boost/shared_ptr.hpp>
 #include <boost/variant.hpp>
+
+#include <boost/serialization/export.hpp>
 
 namespace redman {
 
@@ -75,6 +80,13 @@ private:
 
 private:
 	config_map_t  mConfig;
+
+	friend class boost::serialization::access;
+	template<typename Archiver>
+	void serialize(Archiver& ar, unsigned int const);
+
+	friend bool operator==(Backend const& a, Backend const& b);
+	friend bool operator!=(Backend const& a, Backend const& b);
 };
 
 boost::shared_ptr<Backend>
@@ -124,3 +136,6 @@ Return Backend::sum(T const& t, Ts const& ... ts) const
 
 } // backend
 } // redman
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(redman::backend::Backend)
+BOOST_CLASS_EXPORT_KEY(redman::backend::Backend)

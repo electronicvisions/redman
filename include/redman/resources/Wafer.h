@@ -133,6 +133,9 @@ private:
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver& ar, unsigned int const);
+
+	friend bool operator==(Wafer const& a, Wafer const& b);
+	friend bool operator!=(Wafer const& a, Wafer const& b);
 };
 
 // keep deserialization of old data alive ...
@@ -185,6 +188,10 @@ void Wafer::serialize(Archiver& ar, unsigned int const version)
 		ar & make_nvp("id", mId);
 	}
 
+	if (version > 3) {
+		ar & make_nvp("backend", mBackend);
+	}
+
 }
 
 template<typename Archiver>
@@ -202,5 +209,8 @@ void WaferWithBackend::serialize(Archiver& ar, unsigned int const version)
 } // resources
 } // redman
 
-BOOST_CLASS_VERSION(redman::resources::Wafer, 3)
+BOOST_CLASS_VERSION(redman::resources::Wafer, 4)
 BOOST_CLASS_VERSION(redman::resources::WaferWithBackend, 2)
+
+BOOST_CLASS_TRACKING(redman::resources::Wafer, boost::serialization::track_always)
+BOOST_CLASS_TRACKING(redman::resources::WaferWithBackend, boost::serialization::track_always)

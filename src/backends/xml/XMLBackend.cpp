@@ -8,8 +8,10 @@
 #include <stdexcept>
 #include <iostream>
 
+#include "boost/serialization/path.h"
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/export.hpp>
 
 using namespace redman::resources;
 
@@ -77,9 +79,20 @@ XMLBackend::getFilename(
 	return getPath() / (id + ".xml");
 }
 
+template<typename Archiver>
+void XMLBackend::serialize(Archiver & ar, unsigned int const /*version*/)
+{
+	using boost::serialization::make_nvp;
+	ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Backend);
+	ar & make_nvp("path", mPath);
+}
 } // backend
 } // redman
 
+BOOST_CLASS_EXPORT_IMPLEMENT(redman::backend::XMLBackend)
+
+#include "boost/serialization/serialization_helper.tcc"
+EXPLICIT_INSTANTIATE_BOOST_SERIALIZE(redman::backend::XMLBackend)
 
 extern "C" {
 
