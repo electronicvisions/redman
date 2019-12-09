@@ -99,7 +99,7 @@ void HicannWithBackend::save() {
 std::string HicannWithBackend::id_for_backend() const
 {
 	std::stringstream id;
-	id << "hicann-" << mId.toWafer() << "-" << mId.toHICANNOnWafer().id();
+	id << "hicann-" << mId.toWafer() << "-" << mId.toHICANNOnWafer().toEnum();
 	return id.str();
 }
 
