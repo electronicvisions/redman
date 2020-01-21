@@ -66,7 +66,7 @@ boost::shared_ptr<Hicann> Hicann::create() {
 
 HicannWithBackend::HicannWithBackend(
 		boost::shared_ptr<backend::Backend> backend,
-		HMF::Coordinate::HICANNGlobal id,
+		halco::hicann::v2::HICANNGlobal id,
 		Hicann const& base,
 		bool ignore_missing)
 	: Hicann(base), mId(id), mBackend(backend) {
@@ -105,7 +105,7 @@ std::string HicannWithBackend::id_for_backend() const
 
 boost::shared_ptr<HicannWithBackend> HicannWithBackend::create(
 		boost::shared_ptr<backend::Backend> backend,
-		HMF::Coordinate::HICANNGlobal id,
+		halco::hicann::v2::HICANNGlobal id,
 		bool ignore_missing) {
 	return boost::make_shared<HicannWithBackend>(backend, id, Hicann(), ignore_missing);
 }

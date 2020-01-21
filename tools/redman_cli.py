@@ -8,7 +8,8 @@ Usage: redman_cli.py /wang/data/calibration/brainscales/wip W33H0 has drivers $(
 import inspect
 import argparse
 
-import Coordinate as C
+from pyhalco_common import Enum
+import pyhalco_hicann_v2 as C
 import pyredman
 from pyredman.load import load
 
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     redman_component = getattr(redman_resource, args.component)()
     resource_type = redman_component.resource
     for enum in args.component_enum:
-        coord = resource_type(C.Enum(enum))
+        coord = resource_type(Enum(enum))
         if args.action == "has":
             print redman_component.has(coord)
         elif args.action == "enable":

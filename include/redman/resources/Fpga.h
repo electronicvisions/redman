@@ -64,7 +64,7 @@ private:
 class FpgaWithBackend : public Fpga
 {
 public:
-	typedef HMF::Coordinate::FPGAGlobal id_type;
+	typedef halco::hicann::v2::FPGAGlobal id_type;
 
 	FpgaWithBackend(
 	    boost::shared_ptr<backend::Backend>,

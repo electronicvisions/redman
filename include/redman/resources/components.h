@@ -6,11 +6,15 @@
 #include "redman/ResourceManager.h"
 #include "redman/Whitelist.h"
 
-#include "hal/Coordinate/HMFGeometry.h"
-#include "hal/Coordinate/Merger0OnHICANN.h"
-#include "hal/Coordinate/Merger1OnHICANN.h"
-#include "hal/Coordinate/Merger2OnHICANN.h"
-#include "hal/Coordinate/Merger3OnHICANN.h"
+#include "halco/hicann/v2/external.h"
+#include "halco/hicann/v2/fg.h"
+#include "halco/hicann/v2/hicann.h"
+#include "halco/hicann/v2/l1.h"
+#include "halco/hicann/v2/synapse.h"
+#include "halco/hicann/v2/merger0onhicann.h"
+#include "halco/hicann/v2/merger1onhicann.h"
+#include "halco/hicann/v2/merger2onhicann.h"
+#include "halco/hicann/v2/merger3onhicann.h"
 
 namespace redman {
 
@@ -45,33 +49,33 @@ class ResourceWithFactory
 	} } }																      \
 	BOOST_CLASS_VERSION(redman::resources::components::name, version)
 
-ADD_RESOURCE(Hicanns, HMF::Coordinate::HICANNOnWafer, 1)
+ADD_RESOURCE(Hicanns, halco::hicann::v2::HICANNOnWafer, 1)
 
-ADD_RESOURCE(Neurons, HMF::Coordinate::NeuronOnHICANN, 1)
+ADD_RESOURCE(Neurons, halco::hicann::v2::NeuronOnHICANN, 1)
 
-ADD_RESOURCE(Synapses, HMF::Coordinate::SynapseOnHICANN, 1)
-ADD_RESOURCE(SynapseDrivers, HMF::Coordinate::SynapseDriverOnHICANN, 1)
-ADD_RESOURCE(SynapticInputs, HMF::Coordinate::SynapticInputOnHICANN, 1)
-ADD_RESOURCE(SynapseRows, HMF::Coordinate::SynapseRowOnHICANN, 1)
-ADD_RESOURCE(Analogs, HMF::Coordinate::AnalogOnHICANN, 1)
-ADD_RESOURCE(BackgroundGenerators, HMF::Coordinate::BackgroundGeneratorOnHICANN, 1)
-ADD_RESOURCE(FGBlocks, HMF::Coordinate::FGBlockOnHICANN, 1)
-ADD_RESOURCE(VRepeaters, HMF::Coordinate::VRepeaterOnHICANN, 1)
-ADD_RESOURCE(HRepeaters, HMF::Coordinate::HRepeaterOnHICANN, 1)
-ADD_RESOURCE(SynapseSwitches, HMF::Coordinate::SynapseSwitchOnHICANN, 1)
-ADD_RESOURCE(CrossbarSwitches, HMF::Coordinate::CrossbarSwitchOnHICANN, 1)
-ADD_RESOURCE(SynapseSwitchRows, HMF::Coordinate::SynapseSwitchRowOnHICANN, 1)
+ADD_RESOURCE(Synapses, halco::hicann::v2::SynapseOnHICANN, 1)
+ADD_RESOURCE(SynapseDrivers, halco::hicann::v2::SynapseDriverOnHICANN, 1)
+ADD_RESOURCE(SynapticInputs, halco::hicann::v2::SynapticInputOnHICANN, 1)
+ADD_RESOURCE(SynapseRows, halco::hicann::v2::SynapseRowOnHICANN, 1)
+ADD_RESOURCE(Analogs, halco::hicann::v2::AnalogOnHICANN, 1)
+ADD_RESOURCE(BackgroundGenerators, halco::hicann::v2::BackgroundGeneratorOnHICANN, 1)
+ADD_RESOURCE(FGBlocks, halco::hicann::v2::FGBlockOnHICANN, 1)
+ADD_RESOURCE(VRepeaters, halco::hicann::v2::VRepeaterOnHICANN, 1)
+ADD_RESOURCE(HRepeaters, halco::hicann::v2::HRepeaterOnHICANN, 1)
+ADD_RESOURCE(SynapseSwitches, halco::hicann::v2::SynapseSwitchOnHICANN, 1)
+ADD_RESOURCE(CrossbarSwitches, halco::hicann::v2::CrossbarSwitchOnHICANN, 1)
+ADD_RESOURCE(SynapseSwitchRows, halco::hicann::v2::SynapseSwitchRowOnHICANN, 1)
 
-ADD_RESOURCE(HorizontalBuses, HMF::Coordinate::HLineOnHICANN, 1)
-ADD_RESOURCE(VerticalBuses, HMF::Coordinate::VLineOnHICANN, 1)
+ADD_RESOURCE(HorizontalBuses, halco::hicann::v2::HLineOnHICANN, 1)
+ADD_RESOURCE(VerticalBuses, halco::hicann::v2::VLineOnHICANN, 1)
 
-ADD_RESOURCE(Mergers0, HMF::Coordinate::Merger0OnHICANN, 1)
-ADD_RESOURCE(Mergers1, HMF::Coordinate::Merger1OnHICANN, 1)
-ADD_RESOURCE(Mergers2, HMF::Coordinate::Merger2OnHICANN, 1)
-ADD_RESOURCE(Mergers3, HMF::Coordinate::Merger3OnHICANN, 1)
-ADD_RESOURCE(DNCMergers, HMF::Coordinate::DNCMergerOnHICANN, 1)
+ADD_RESOURCE(Mergers0, halco::hicann::v2::Merger0OnHICANN, 1)
+ADD_RESOURCE(Mergers1, halco::hicann::v2::Merger1OnHICANN, 1)
+ADD_RESOURCE(Mergers2, halco::hicann::v2::Merger2OnHICANN, 1)
+ADD_RESOURCE(Mergers3, halco::hicann::v2::Merger3OnHICANN, 1)
+ADD_RESOURCE(DNCMergers, halco::hicann::v2::DNCMergerOnHICANN, 1)
 
-ADD_RESOURCE(HighspeedLinksOnDNC, HMF::Coordinate::HighspeedLinkOnDNC, 1)
-ADD_RESOURCE(Fpgas, HMF::Coordinate::FPGAOnWafer, 1)
+ADD_RESOURCE(HighspeedLinksOnDNC, halco::hicann::v2::HighspeedLinkOnDNC, 1)
+ADD_RESOURCE(Fpgas, halco::hicann::v2::FPGAOnWafer, 1)
 
 #undef ADD_RESOURCE

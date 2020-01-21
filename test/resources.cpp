@@ -9,7 +9,7 @@
 using namespace redman;
 using namespace redman::backend;
 using namespace redman::resources;
-namespace HMFC = HMF::Coordinate;
+namespace HMFC = halco::hicann::v2;
 
 class AWafer : public ::testing::Test {
 public:
@@ -42,7 +42,7 @@ fixture_for_hicann_component(Synapses, synapses);
 TEST_F(SomeNeurons, CanBeDisabled) {
 	ASSERT_EQ(512, neurons->available());
 
-	auto absent = HMF::Coordinate::NeuronOnHICANN(geometry::Enum(5));
+	auto absent = halco::hicann::v2::NeuronOnHICANN(halco::common::Enum(5));
 	neurons->disable(absent);
 
 	ASSERT_EQ(511, neurons->available());
@@ -69,7 +69,7 @@ TEST_F(AWafer, ManagesAvailableHicanns) {
 }
 
 TEST_F(AHicann, CanIntegrateDisabledHLines) {
-	auto absent = HMF::Coordinate::HLineOnHICANN(geometry::Enum(5));
+	auto absent = halco::hicann::v2::HLineOnHICANN(halco::common::Enum(5));
 
 	auto hbuses = hicann.hbuses();
 	for (auto it=hbuses->begin_disabled(); it!=hbuses->end_disabled(); ++it) {
@@ -101,7 +101,7 @@ fixture_for_fpga_component(HighspeedLinksOnDNC, hslinks);
 TEST_F(SomeHighspeedLinksOnDNC, CanBeDisabled) {
 	ASSERT_EQ(8, hslinks->available());
 
-	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	auto absent = halco::hicann::v2::HighspeedLinkOnDNC(halco::common::Enum(5));
 	hslinks->disable(absent);
 
 	ASSERT_EQ(7, hslinks->available());
@@ -127,7 +127,7 @@ TEST_F(AFpga, ManagesAvailableHighspeedLinks) {
 }
 
 TEST_F(AFpga, CanIntegrateDisabledHighspeedLinks) {
-	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	auto absent = halco::hicann::v2::HighspeedLinkOnDNC(halco::common::Enum(5));
 
 	auto hslinks = fpga.hslinks();
 	for (auto it=hslinks->begin_disabled(); it!=hslinks->end_disabled(); ++it) {
@@ -148,8 +148,8 @@ TEST(IntersectionTest, IntersectionWorks) {
 	Hicann hicann_a;
 	Hicann hicann_b;
 
-	HMFC::NeuronOnHICANN const nrn_0(HMFC::Enum(0));
-	HMFC::NeuronOnHICANN const nrn_1(HMFC::Enum(1));
+	HMFC::NeuronOnHICANN const nrn_0(halco::common::Enum(0));
+	HMFC::NeuronOnHICANN const nrn_1(halco::common::Enum(1));
 
 	hicann_a.neurons()->disable(nrn_0);
 	hicann_b.neurons()->disable(nrn_1);

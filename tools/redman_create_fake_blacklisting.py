@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import Coordinate as C
+import pyhalco_hicann_v2 as C
 from pyredman.load import load
 
 backend = load.HicannWithBackend("./", C.HICANNGlobal())

@@ -7,7 +7,7 @@
 
 using namespace redman;
 using namespace redman::resources;
-namespace HMFC = HMF::Coordinate;
+namespace HMFC = halco::hicann::v2;
 TYPED_TEST_CASE(TestWithBackend, BackendTypes);
 
 template <typename T>
@@ -44,7 +44,7 @@ TYPED_TEST(AWaferWithBackend, LoadsHicanns) {
 	ASSERT_TRUE(static_cast<bool>(hicann));
 
 	boost::shared_ptr<components::Neurons> nrns = hicann->neurons();
-	auto absent = HMF::Coordinate::NeuronOnHICANN(geometry::Enum(5));
+	auto absent = halco::hicann::v2::NeuronOnHICANN(halco::common::Enum(5));
 
 	if (nrns->has(absent))
 		nrns->disable(absent);
@@ -73,7 +73,7 @@ TYPED_TEST(AWaferWithBackend, AllowsToInjectHicannResources) {
 	auto& wafer = TestFixture::wafer;
 
 	boost::shared_ptr<Hicann> hicann = boost::make_shared<Hicann>();
-	auto absent = HMF::Coordinate::NeuronOnHICANN(geometry::Enum(5));
+	auto absent = halco::hicann::v2::NeuronOnHICANN(halco::common::Enum(5));
 	hicann->neurons()->disable(absent);
 
 	HMFC::HICANNOnWafer hi;
@@ -105,7 +105,7 @@ TYPED_TEST(AWaferWithBackend, LoadsFpgas) {
 	ASSERT_TRUE(static_cast<bool>(fpga));
 
 	boost::shared_ptr<components::HighspeedLinksOnDNC> hslinks = fpga->hslinks();
-	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	auto absent = halco::hicann::v2::HighspeedLinkOnDNC(halco::common::Enum(5));
 
 	if (hslinks->has(absent))
 		hslinks->disable(absent);
@@ -134,7 +134,7 @@ TYPED_TEST(AWaferWithBackend, AllowsToInjectFpgaResources) {
 	auto& wafer = TestFixture::wafer;
 
 	boost::shared_ptr<Fpga> fpga = boost::make_shared<Fpga>();
-	auto absent = HMF::Coordinate::HighspeedLinkOnDNC(geometry::Enum(5));
+	auto absent = halco::hicann::v2::HighspeedLinkOnDNC(halco::common::Enum(5));
 	fpga->hslinks()->disable(absent);
 
 	HMFC::FPGAOnWafer hi;

@@ -5,7 +5,7 @@
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 
-#include "hal/Coordinate/External.h"
+#include "halco/hicann/v2/external.h"
 
 #include "redman/resources/Fpga.h"
 #include "redman/resources/components.h"

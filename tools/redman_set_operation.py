@@ -11,7 +11,7 @@ directories foo bar baz.
 import os
 import argparse
 
-import Coordinate as C
+import pyhalco_hicann_v2 as C
 from pyredman.load import load
 
 parser = argparse.ArgumentParser()

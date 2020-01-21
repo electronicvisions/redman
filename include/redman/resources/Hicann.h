@@ -110,11 +110,11 @@ private:
 
 class HicannWithBackend : public Hicann {
 public:
-	typedef HMF::Coordinate::HICANNGlobal id_type;
+	typedef halco::hicann::v2::HICANNGlobal id_type;
 
 	HicannWithBackend(
 		boost::shared_ptr<backend::Backend>,
-		HMF::Coordinate::HICANNGlobal,
+		halco::hicann::v2::HICANNGlobal,
 		Hicann const& = Hicann(),
 		bool ignore_missing = true);
 	virtual ~HicannWithBackend();
@@ -126,7 +126,7 @@ public:
 	// factory function for Py++
 	static boost::shared_ptr<HicannWithBackend> create(
 		boost::shared_ptr<backend::Backend> backend,
-		HMF::Coordinate::HICANNGlobal id,
+		halco::hicann::v2::HICANNGlobal id,
 		bool ignore_missing = true);
 
 	std::string id_for_backend() const;

@@ -4,7 +4,8 @@ exits with 0 if given HICANN has highspeed, with 1 otherwise
 """
 
 import argparse
-import Coordinate as C
+from pyhalco_common import Enum
+import pyhalco_hicann_v2 as C
 from pyredman.load import load
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -17,7 +18,7 @@ parser.add_argument('--defects_path', required=True,
 
 args = parser.parse_args()
 wafer_c = C.Wafer(args.wafer)
-hicann_c = C.HICANNOnWafer(C.Enum(args.hicann))
+hicann_c = C.HICANNOnWafer(Enum(args.hicann))
 hicann_global_c = C.HICANNGlobal(hicann_c, wafer_c)
 fpga_global_c = hicann_global_c.toFPGAGlobal()
 

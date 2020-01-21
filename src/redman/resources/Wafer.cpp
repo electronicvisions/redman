@@ -46,7 +46,7 @@ boost::shared_ptr<Wafer> Wafer::create(id_type const& id) {
 	return boost::make_shared<Wafer>(id);
 }
 
-bool Wafer::has(HMF::Coordinate::HICANNOnWafer const& h) const
+bool Wafer::has(halco::hicann::v2::HICANNOnWafer const& h) const
 {
 	return mHicanns->has(h);
 }
@@ -59,7 +59,7 @@ boost::shared_ptr<components::Hicanns const> Wafer::hicanns() const {
 	return mHicanns;
 }
 
-bool Wafer::has(HMF::Coordinate::FPGAOnWafer const& f) const
+bool Wafer::has(halco::hicann::v2::FPGAOnWafer const& f) const
 {
 	return mFpgas->has(f);
 }
@@ -100,7 +100,7 @@ boost::shared_ptr<components::Fpgas const> Wafer::fpgas() const {
 	return mFpgas;
 }
 
-boost::shared_ptr<Hicann> Wafer::get(HMF::Coordinate::HICANNOnWafer const& h) const
+boost::shared_ptr<Hicann> Wafer::get(halco::hicann::v2::HICANNOnWafer const& h) const
 {
 	if (!mGetBehavior.ignore_hicann_missing && !has(h)) {
 		return boost::shared_ptr<Hicann>();
@@ -112,7 +112,7 @@ boost::shared_ptr<Hicann> Wafer::get(HMF::Coordinate::HICANNOnWafer const& h) co
 	}
 
 	if(mBackend) {
-		HMF::Coordinate::HICANNGlobal gh(h, mId);
+		halco::hicann::v2::HICANNGlobal gh(h, mId);
 		auto tmp = HicannWithBackend(mBackend, gh, Hicann(), mBackendBehavior.ignore_hicann_missing);
 		auto res = boost::make_shared<Hicann>(tmp);
 		mHicannResourceCache.insert({h, res});
@@ -123,7 +123,7 @@ boost::shared_ptr<Hicann> Wafer::get(HMF::Coordinate::HICANNOnWafer const& h) co
 	return res;
 }
 
-boost::shared_ptr<Fpga> Wafer::get(HMF::Coordinate::FPGAOnWafer const& f) const
+boost::shared_ptr<Fpga> Wafer::get(halco::hicann::v2::FPGAOnWafer const& f) const
 {
 	if (!mGetBehavior.ignore_fpga_missing && !has(f)) {
 		return boost::shared_ptr<Fpga>();
@@ -135,7 +135,7 @@ boost::shared_ptr<Fpga> Wafer::get(HMF::Coordinate::FPGAOnWafer const& f) const
 	}
 
 	if (mBackend) {
-		HMF::Coordinate::FPGAGlobal gh(f, mId);
+		halco::hicann::v2::FPGAGlobal gh(f, mId);
 		auto tmp = FpgaWithBackend(mBackend, gh, Fpga(), mBackendBehavior.ignore_fpga_missing);
 		auto res = boost::make_shared<Fpga>(tmp);
 		mFpgaResourceCache.insert({f, res});
@@ -146,12 +146,12 @@ boost::shared_ptr<Fpga> Wafer::get(HMF::Coordinate::FPGAOnWafer const& f) const
 	return res;
 }
 
-void Wafer::inject(HMF::Coordinate::HICANNOnWafer const& h, boost::shared_ptr<Hicann> res)
+void Wafer::inject(halco::hicann::v2::HICANNOnWafer const& h, boost::shared_ptr<Hicann> res)
 {
 	mHicannResourceCache[h] = res;
 }
 
-void Wafer::inject(HMF::Coordinate::FPGAOnWafer const& h, boost::shared_ptr<Fpga> res)
+void Wafer::inject(halco::hicann::v2::FPGAOnWafer const& h, boost::shared_ptr<Fpga> res)
 {
 	mFpgaResourceCache[h] = res;
 }

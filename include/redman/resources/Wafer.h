@@ -23,7 +23,7 @@ namespace resources {
 
 class Wafer : public Base {
 public:
-	typedef HMF::Coordinate::Wafer id_type;
+	typedef halco::hicann::v2::Wafer id_type;
 	Wafer(id_type const& id = id_type());
 	virtual ~Wafer();
 
@@ -31,11 +31,11 @@ public:
 
 	/** Check whether the given HICANN is enabled on this wafer.
 	 */
-	bool has(HMF::Coordinate::HICANNOnWafer const&) const;
+	bool has(halco::hicann::v2::HICANNOnWafer const&) const;
 
 	/** Check whether the given FPGA is enabled on this wafer.
 	 */
-	bool has(HMF::Coordinate::FPGAOnWafer const&) const;
+	bool has(halco::hicann::v2::FPGAOnWafer const&) const;
 
 	struct get_behavior {
 		get_behavior(bool ihm = false, bool ifm = false);
@@ -62,13 +62,13 @@ public:
 	 * Priority: 1. runtime cache, 2. via backend, 3. new if ignore_hicann_missing
 	 * 2 and 3 are then also inserted into the runtime cache
 	 */
-	boost::shared_ptr<resources::Hicann> get(HMF::Coordinate::HICANNOnWafer const&) const;
+	boost::shared_ptr<resources::Hicann> get(halco::hicann::v2::HICANNOnWafer const&) const;
 
 	/** Get the FPGA resource
 	 * Priority: 1. runtime cache, 2. via backend, 3. new if ignore_fpga_missing
 	 * 2 and 3 are then also inserted into the runtime cache
 	 */
-	boost::shared_ptr<resources::Fpga> get(HMF::Coordinate::FPGAOnWafer const&) const;
+	boost::shared_ptr<resources::Fpga> get(halco::hicann::v2::FPGAOnWafer const&) const;
 
 	boost::shared_ptr<components::Hicanns>       hicanns();
 	boost::shared_ptr<components::Fpgas>         fpgas();
@@ -77,13 +77,13 @@ public:
 	 * The provided resource will be returned by `get()`, circumventing access
 	 * to the backend.
 	 */
-	void inject(HMF::Coordinate::HICANNOnWafer const&, boost::shared_ptr<Hicann>);
+	void inject(halco::hicann::v2::HICANNOnWafer const&, boost::shared_ptr<Hicann>);
 
 	/** Inject the given FPGA resource into the runtime cache.
 	 * The provided resource will be returned by `get()`, circumventing access
 	 * to the backend.
 	 */
-	void inject(HMF::Coordinate::FPGAOnWafer const&, boost::shared_ptr<Fpga>);
+	void inject(halco::hicann::v2::FPGAOnWafer const&, boost::shared_ptr<Fpga>);
 
 	/** Store Hicanns and Fpgas components to disk, backend must be set.
 	 * Does not include Hicann and Fpga resources!
@@ -126,8 +126,8 @@ private:
 	get_behavior mGetBehavior;
 
 #ifndef PYPLUSPLUS
-	mutable std::unordered_map<HMF::Coordinate::HICANNOnWafer, boost::shared_ptr<Hicann> > mHicannResourceCache;
-	mutable std::unordered_map<HMF::Coordinate::FPGAOnWafer, boost::shared_ptr<Fpga> > mFpgaResourceCache;
+	mutable std::unordered_map<halco::hicann::v2::HICANNOnWafer, boost::shared_ptr<Hicann> > mHicannResourceCache;
+	mutable std::unordered_map<halco::hicann::v2::FPGAOnWafer, boost::shared_ptr<Fpga> > mFpgaResourceCache;
 #endif // PYPLUSPLUS
 
 	friend class boost::serialization::access;

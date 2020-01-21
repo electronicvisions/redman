@@ -5,7 +5,8 @@ import unittest
 import tempfile
 import shutil
 import pyredman as redman
-from pyhalbe.Coordinate import (Enum, Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal, FPGAOnWafer, HighspeedLinkOnDNC)
+from pyhalco_common import Enum
+from pyhalco_hicann_v2 import (Wafer, HICANNOnWafer, NeuronOnHICANN, HICANNGlobal, FPGAOnWafer, HighspeedLinkOnDNC)
 import pyredman.load as load
 
 
