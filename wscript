@@ -57,7 +57,7 @@ def build(bld):
 
     bld.shlib(
             features        = 'cxx cxxshlib',
-            target          = 'redman',
+            target          = '_redman',
             source          = bld.path.ant_glob('src/redman/**/*.cpp'),
             use             = [
                 'BOOST4REDMAN',
@@ -81,11 +81,17 @@ def build(bld):
         source=bld.path.ant_glob('src/backends/xml/*.cpp'),
         use=[
             'BOOST4REDMANXML',
-            'redman',
+            '_redman',
         ],
         includes='.',
         install_path='lib',
         **flags
+    )
+
+    bld(
+        target = 'redman',
+        features = "use",
+        use = ["_redman", "redman_xml"]
     )
 
     bld.install_files(
