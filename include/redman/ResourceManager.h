@@ -295,7 +295,7 @@ void ResourceManager<Res, Pol, Pred, Cmp>::intersection(manager const& other) {
 		std::inserter(diff, diff.begin()), Cmp());
 
 	Pol::from_set(mSelection, mPredicate, diff);
-	mHasValue = true;
+	mHasValue = has_value() || other.has_value();
 }
 
 template<typename Res, typename Pol, typename Pred, typename Cmp>
@@ -307,7 +307,7 @@ void ResourceManager<Res, Pol, Pred, Cmp>::merge(manager const& other) {
 		std::inserter(diff, diff.begin()), Cmp());
 
 	Pol::from_set(mSelection, mPredicate, diff);
-	mHasValue = true;
+	mHasValue = has_value() || other.has_value();
 }
 
 template<typename Res, typename Pol, typename Pred, typename Cmp>
