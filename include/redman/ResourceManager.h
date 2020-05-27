@@ -7,6 +7,7 @@
 #ifndef PYPLUSPLUS
 #include <type_traits>
 #include <functional>
+#include <boost/range.hpp>
 #endif // PYPLUSPLUS
 
 #include <algorithm>
@@ -85,10 +86,16 @@ public:
 	/// Return an iterator to the end of all enabled resources.
 	iterator_type end() const;
 
+	/// Return iterable over all enabled resources.
+	boost::iterator_range<iterator_type> enabled() const;
+
 	/// Return an iterator to the beginning of all disabled resources.
 	iterator_type begin_disabled() const;
 	/// Return an iterator to the end of all disabled resources.
 	iterator_type end_disabled() const;
+
+	/// Return iterable over all disabled resources.
+	boost::iterator_range<iterator_type> disabled() const;
 #endif // PYPLUSPLUS
 
 	/** Reset enabled resources to policy default.
@@ -359,6 +366,12 @@ auto ResourceManager<Res, Pol, Pred, Cmp>::end() const -> iterator_type {
 		filter, redman::end(mPredicate), redman::end(mPredicate));
 }
 
+template <typename Res, typename Pol, typename Pred, typename Cmp>
+auto ResourceManager<Res, Pol, Pred, Cmp>::enabled() const -> boost::iterator_range<iterator_type>
+{
+	return boost::make_iterator_range(begin(), end());
+}
+
 template<typename Res, typename Pol, typename Pred, typename Cmp>
 auto ResourceManager<Res, Pol, Pred, Cmp>::begin_disabled() const -> iterator_type {
 	filter_type filter = [this](Res const& r) -> bool {
@@ -377,6 +390,12 @@ auto ResourceManager<Res, Pol, Pred, Cmp>::end_disabled() const -> iterator_type
 
 	return boost::make_filter_iterator(
 		filter, redman::end(mPredicate), redman::end(mPredicate));
+}
+
+template <typename Res, typename Pol, typename Pred, typename Cmp>
+auto ResourceManager<Res, Pol, Pred, Cmp>::disabled() const -> boost::iterator_range<iterator_type>
+{
+	return boost::make_iterator_range(begin_disabled(), end_disabled());
 }
 
 } // redman
