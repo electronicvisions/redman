@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="16">
+<boost_serialization signature="serialization::archive" version="17">
 <data class_id="0" tracking_level="0" version="1">
-	<px class_id="1" class_name="redman::resources::HicannWithBackend" tracking_level="1" version="0" object_id="_0">
-		<Hicann class_id="2" tracking_level="1" version="0" object_id="_1">
+	<px class_id="1" class_name="redman::resources::HicannWithBackend" tracking_level="1" version="1" object_id="_0">
+		<Hicann class_id="2" tracking_level="1" version="2" object_id="_1">
 			<Base class_id="3" tracking_level="0" version="0"></Base>
 			<neurons class_id="4" tracking_level="0" version="1">
 				<px class_id="5" tracking_level="1" version="1" object_id="_2">
@@ -35,7 +35,7 @@
 					<hasvalue>0</hasvalue>
 				</px>
 			</drivers>
-			<hbuses class_id="16" tracking_level="0" version="1">
+			<synaptic_inputs class_id="16" tracking_level="0" version="1">
 				<px class_id="17" tracking_level="1" version="1" object_id="_5">
 					<predicate class_id="18" tracking_level="0" version="0"></predicate>
 					<selection class_id="19" tracking_level="0" version="0">
@@ -44,8 +44,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</hbuses>
-			<vbuses class_id="20" tracking_level="0" version="1">
+			</synaptic_inputs>
+			<hbuses class_id="20" tracking_level="0" version="1">
 				<px class_id="21" tracking_level="1" version="1" object_id="_6">
 					<predicate class_id="22" tracking_level="0" version="0"></predicate>
 					<selection class_id="23" tracking_level="0" version="0">
@@ -54,8 +54,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</vbuses>
-			<merger0 class_id="24" tracking_level="0" version="1">
+			</hbuses>
+			<vbuses class_id="24" tracking_level="0" version="1">
 				<px class_id="25" tracking_level="1" version="1" object_id="_7">
 					<predicate class_id="26" tracking_level="0" version="0"></predicate>
 					<selection class_id="27" tracking_level="0" version="0">
@@ -64,8 +64,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</merger0>
-			<merger1 class_id="28" tracking_level="0" version="1">
+			</vbuses>
+			<merger0 class_id="28" tracking_level="0" version="1">
 				<px class_id="29" tracking_level="1" version="1" object_id="_8">
 					<predicate class_id="30" tracking_level="0" version="0"></predicate>
 					<selection class_id="31" tracking_level="0" version="0">
@@ -74,8 +74,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</merger1>
-			<merger2 class_id="32" tracking_level="0" version="1">
+			</merger0>
+			<merger1 class_id="32" tracking_level="0" version="1">
 				<px class_id="33" tracking_level="1" version="1" object_id="_9">
 					<predicate class_id="34" tracking_level="0" version="0"></predicate>
 					<selection class_id="35" tracking_level="0" version="0">
@@ -84,8 +84,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</merger2>
-			<merger3 class_id="36" tracking_level="0" version="1">
+			</merger1>
+			<merger2 class_id="36" tracking_level="0" version="1">
 				<px class_id="37" tracking_level="1" version="1" object_id="_10">
 					<predicate class_id="38" tracking_level="0" version="0"></predicate>
 					<selection class_id="39" tracking_level="0" version="0">
@@ -94,8 +94,8 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
-			</merger3>
-			<dnc_merger class_id="40" tracking_level="0" version="1">
+			</merger2>
+			<merger3 class_id="40" tracking_level="0" version="1">
 				<px class_id="41" tracking_level="1" version="1" object_id="_11">
 					<predicate class_id="42" tracking_level="0" version="0"></predicate>
 					<selection class_id="43" tracking_level="0" version="0">
@@ -104,8 +104,122 @@
 					</selection>
 					<hasvalue>0</hasvalue>
 				</px>
+			</merger3>
+			<dnc_merger class_id="44" tracking_level="0" version="1">
+				<px class_id="45" tracking_level="1" version="1" object_id="_12">
+					<predicate class_id="46" tracking_level="0" version="0"></predicate>
+					<selection class_id="47" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
 			</dnc_merger>
+			<synapserows class_id="48" tracking_level="0" version="1">
+				<px class_id="49" tracking_level="1" version="1" object_id="_13">
+					<predicate class_id="50" tracking_level="0" version="0"></predicate>
+					<selection class_id="51" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</synapserows>
+			<analogs class_id="52" tracking_level="0" version="1">
+				<px class_id="53" tracking_level="1" version="1" object_id="_14">
+					<predicate class_id="54" tracking_level="0" version="0"></predicate>
+					<selection class_id="55" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</analogs>
+			<backgroundgenerators class_id="56" tracking_level="0" version="1">
+				<px class_id="57" tracking_level="1" version="1" object_id="_15">
+					<predicate class_id="58" tracking_level="0" version="0"></predicate>
+					<selection class_id="59" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</backgroundgenerators>
+			<fgblocks class_id="60" tracking_level="0" version="1">
+				<px class_id="61" tracking_level="1" version="1" object_id="_16">
+					<predicate class_id="62" tracking_level="0" version="0"></predicate>
+					<selection class_id="63" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</fgblocks>
+			<vrepeaters class_id="64" tracking_level="0" version="1">
+				<px class_id="65" tracking_level="1" version="1" object_id="_17">
+					<predicate class_id="66" tracking_level="0" version="0"></predicate>
+					<selection class_id="67" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</vrepeaters>
+			<hrepeaters class_id="68" tracking_level="0" version="1">
+				<px class_id="69" tracking_level="1" version="1" object_id="_18">
+					<predicate class_id="70" tracking_level="0" version="0"></predicate>
+					<selection class_id="71" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</hrepeaters>
+			<synapseswitches class_id="72" tracking_level="0" version="1">
+				<px class_id="73" tracking_level="1" version="1" object_id="_19">
+					<predicate class_id="74" tracking_level="0" version="0"></predicate>
+					<selection class_id="75" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</synapseswitches>
+			<crossbarswitches class_id="76" tracking_level="0" version="1">
+				<px class_id="77" tracking_level="1" version="1" object_id="_20">
+					<predicate class_id="78" tracking_level="0" version="0"></predicate>
+					<selection class_id="79" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</crossbarswitches>
+			<synapseswitchrows class_id="80" tracking_level="0" version="1">
+				<px class_id="81" tracking_level="1" version="1" object_id="_21">
+					<predicate class_id="82" tracking_level="0" version="0"></predicate>
+					<selection class_id="83" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</synapseswitchrows>
 		</Hicann>
+		<id class_id="84" tracking_level="0" version="0">
+			<wafer class_id="85" tracking_level="0" version="0">
+				<value>0</value>
+			</wafer>
+			<x class_id="86" tracking_level="0" version="0">
+				<value>12</value>
+			</x>
+			<y class_id="87" tracking_level="0" version="0">
+				<value>0</value>
+			</y>
+			<e class_id="88" tracking_level="0" version="0">
+				<value>0</value>
+			</e>
+		</id>
 	</px>
 </data>
 </boost_serialization>

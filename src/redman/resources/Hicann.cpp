@@ -19,6 +19,7 @@ Hicann::Hicann()
       mSynapseSwitches(boost::make_shared<components::SynapseSwitches>()),
       mCrossbarSwitches(boost::make_shared<components::CrossbarSwitches>()),
       mSynapseSwitchRows(boost::make_shared<components::SynapseSwitchRows>()),
+      mSynapseArrays(boost::make_shared<components::SynapseArrays>()),
       mHBuses(boost::make_shared<components::HorizontalBuses>()),
       mVBuses(boost::make_shared<components::VerticalBuses>()),
       mMergers0(boost::make_shared<components::Mergers0>()),
@@ -45,6 +46,7 @@ void Hicann::intersection(Hicann const& other) {
 	synapseswitches()->intersection(*other.synapseswitches());
 	crossbarswitches()->intersection(*other.crossbarswitches());
 	synapseswitchrows()->intersection(*other.synapseswitchrows());
+	synapsearrays()->intersection(*other.synapsearrays());
 
 	hbuses()->intersection(*other.hbuses());
 	vbuses()->intersection(*other.vbuses());
@@ -195,6 +197,14 @@ bool operator==(Hicann const& a, Hicann const& b)
 	} else if (
 	    static_cast<bool>(a.mSynapseSwitchRows) &&
 	    ((*a.mSynapseSwitchRows) != (*b.mSynapseSwitchRows))) {
+		return false;
+	}
+
+	if (static_cast<bool>(a.mSynapseArrays) != static_cast<bool>(b.mSynapseArrays)) {
+		return false;
+	} else if (
+	    static_cast<bool>(a.mSynapseArrays) &&
+	    ((*a.mSynapseArrays) != (*b.mSynapseArrays))) {
 		return false;
 	}
 

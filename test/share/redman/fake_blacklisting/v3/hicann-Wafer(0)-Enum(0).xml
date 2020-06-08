@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="17">
+<boost_serialization signature="serialization::archive" version="18">
 <data class_id="0" tracking_level="0" version="1">
 	<px class_id="1" class_name="redman::resources::HicannWithBackend" tracking_level="1" version="1" object_id="_0">
-		<Hicann class_id="2" tracking_level="1" version="2" object_id="_1">
+		<Hicann class_id="2" tracking_level="1" version="3" object_id="_1">
 			<Base class_id="3" tracking_level="0" version="0"></Base>
 			<neurons class_id="4" tracking_level="0" version="1">
 				<px class_id="5" tracking_level="1" version="1" object_id="_2">
@@ -205,18 +205,28 @@
 					<hasvalue>0</hasvalue>
 				</px>
 			</synapseswitchrows>
+			<synapsearrays class_id="84" tracking_level="0" version="1">
+				<px class_id="85" tracking_level="1" version="1" object_id="_22">
+					<predicate class_id="86" tracking_level="0" version="0"></predicate>
+					<selection class_id="87" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</synapsearrays>
 		</Hicann>
-		<id class_id="84" tracking_level="0" version="0">
-			<wafer class_id="85" tracking_level="0" version="0">
+		<id class_id="88" tracking_level="0" version="0">
+			<wafer class_id="89" tracking_level="0" version="0">
 				<value>0</value>
 			</wafer>
-			<x class_id="86" tracking_level="0" version="0">
+			<x class_id="90" tracking_level="0" version="0">
 				<value>12</value>
 			</x>
-			<y class_id="87" tracking_level="0" version="0">
+			<y class_id="91" tracking_level="0" version="0">
 				<value>0</value>
 			</y>
-			<e class_id="88" tracking_level="0" version="0">
+			<e class_id="92" tracking_level="0" version="0">
 				<value>0</value>
 			</e>
 		</id>

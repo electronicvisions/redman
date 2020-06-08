@@ -107,6 +107,30 @@ class BackendTests(object):
         self.assertFalse(wafer_with_backend_v2.hicanns().has_value())
         self.assertFalse(wafer_with_backend_v2.fpgas().has_value())
 
+        hicann_with_backend_v2 = load.HicannWithBackend("share/redman/fake_blacklisting/v2/",
+                                                        HICANNGlobal(), ignore_missing=False)
+
+        self.assertFalse(hicann_with_backend_v2.neurons().has_value())
+        self.assertFalse(hicann_with_backend_v2.synapses().has_value())
+        self.assertFalse(hicann_with_backend_v2.drivers().has_value())
+        self.assertFalse(hicann_with_backend_v2.synaptic_inputs().has_value())
+        self.assertFalse(hicann_with_backend_v2.hbuses().has_value())
+        self.assertFalse(hicann_with_backend_v2.vbuses().has_value())
+        self.assertFalse(hicann_with_backend_v2.mergers0().has_value())
+        self.assertFalse(hicann_with_backend_v2.mergers1().has_value())
+        self.assertFalse(hicann_with_backend_v2.mergers2().has_value())
+        self.assertFalse(hicann_with_backend_v2.mergers3().has_value())
+        self.assertFalse(hicann_with_backend_v2.dncmergers().has_value())
+        self.assertFalse(hicann_with_backend_v2.synapserows().has_value())
+        self.assertFalse(hicann_with_backend_v2.analogs().has_value())
+        self.assertFalse(hicann_with_backend_v2.backgroundgenerators().has_value())
+        self.assertFalse(hicann_with_backend_v2.fgblocks().has_value())
+        self.assertFalse(hicann_with_backend_v2.vrepeaters().has_value())
+        self.assertFalse(hicann_with_backend_v2.hrepeaters().has_value())
+        self.assertFalse(hicann_with_backend_v2.synapseswitches().has_value())
+        self.assertFalse(hicann_with_backend_v2.crossbarswitches().has_value())
+        self.assertFalse(hicann_with_backend_v2.synapseswitchrows().has_value())
+
         hicann_with_backend_v3 = load.HicannWithBackend("share/redman/fake_blacklisting/v3/",
                                                         HICANNGlobal(), ignore_missing=False)
 
@@ -130,6 +154,7 @@ class BackendTests(object):
         self.assertFalse(hicann_with_backend_v3.synapseswitches().has_value())
         self.assertFalse(hicann_with_backend_v3.crossbarswitches().has_value())
         self.assertFalse(hicann_with_backend_v3.synapseswitchrows().has_value())
+        self.assertFalse(hicann_with_backend_v3.synapsearrays().has_value())
 
 class TestXMLBackend(BackendTests, unittest.TestCase):
     def setUp(self):

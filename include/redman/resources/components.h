@@ -65,6 +65,7 @@ ADD_RESOURCE(HRepeaters, halco::hicann::v2::HRepeaterOnHICANN, 1)
 ADD_RESOURCE(SynapseSwitches, halco::hicann::v2::SynapseSwitchOnHICANN, 1)
 ADD_RESOURCE(CrossbarSwitches, halco::hicann::v2::CrossbarSwitchOnHICANN, 1)
 ADD_RESOURCE(SynapseSwitchRows, halco::hicann::v2::SynapseSwitchRowOnHICANN, 1)
+ADD_RESOURCE(SynapseArrays, halco::hicann::v2::SynapseArrayOnHICANN, 1)
 
 ADD_RESOURCE(HorizontalBuses, halco::hicann::v2::HLineOnHICANN, 1)
 ADD_RESOURCE(VerticalBuses, halco::hicann::v2::VLineOnHICANN, 1)

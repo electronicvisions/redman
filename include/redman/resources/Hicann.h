@@ -33,6 +33,7 @@ public:
 	boost::shared_ptr<components::SynapseSwitches>    synapseswitches()    { return mSynapseSwitches; }
 	boost::shared_ptr<components::CrossbarSwitches>   crossbarswitches()   { return mCrossbarSwitches; }
 	boost::shared_ptr<components::SynapseSwitchRows> synapseswitchrows() { return mSynapseSwitchRows; }
+	boost::shared_ptr<components::SynapseArrays> synapsearrays() { return mSynapseArrays; }
 
 	boost::shared_ptr<components::HorizontalBuses> hbuses()        { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses>   vbuses()        { return mVBuses; }
@@ -61,6 +62,7 @@ public:
 	boost::shared_ptr<components::SynapseSwitches const>    synapseswitches()    const { return mSynapseSwitches; }
 	boost::shared_ptr<components::CrossbarSwitches const>   crossbarswitches()   const { return mCrossbarSwitches; }
 	boost::shared_ptr<components::SynapseSwitchRows const> synapseswitchrows() const { return mSynapseSwitchRows; }
+	boost::shared_ptr<components::SynapseArrays const> synapsearrays() const { return mSynapseArrays; }
 
 	boost::shared_ptr<components::HorizontalBuses const> hbuses() const { return mHBuses; }
 	boost::shared_ptr<components::VerticalBuses const>   vbuses() const { return mVBuses; }
@@ -93,6 +95,7 @@ private:
 	boost::shared_ptr<components::SynapseSwitches> mSynapseSwitches;
 	boost::shared_ptr<components::CrossbarSwitches> mCrossbarSwitches;
 	boost::shared_ptr<components::SynapseSwitchRows> mSynapseSwitchRows;
+	boost::shared_ptr<components::SynapseArrays> mSynapseArrays;
 
 	boost::shared_ptr<components::HorizontalBuses> mHBuses;
 	boost::shared_ptr<components::VerticalBuses> mVBuses;
@@ -190,6 +193,9 @@ void Hicann::serialize(Archiver& ar, unsigned int const version)
 		ar & make_nvp("crossbarswitches", mCrossbarSwitches);
 		ar & make_nvp("synapseswitchrows", mSynapseSwitchRows);
 	}
+	if (version > 2) {
+		ar & make_nvp("synapsearrays", mSynapseArrays);
+	}
 }
 
 template <typename Archiver>
@@ -206,7 +212,7 @@ void HicannWithBackend::serialize(Archiver& ar, unsigned int const version)
 } // redman
 
 BOOST_CLASS_VERSION(redman::resources::HicannWithBackend, 1)
-BOOST_CLASS_VERSION(redman::resources::Hicann, 2)
+BOOST_CLASS_VERSION(redman::resources::Hicann, 3)
 
 BOOST_CLASS_TRACKING(redman::resources::Hicann, boost::serialization::track_always)
 BOOST_CLASS_TRACKING(redman::resources::HicannWithBackend, boost::serialization::track_always)
