@@ -156,6 +156,12 @@ class BackendTests(object):
         self.assertFalse(hicann_with_backend_v3.synapseswitchrows().has_value())
         self.assertFalse(hicann_with_backend_v3.synapsearrays().has_value())
 
+        wafer_with_backend_v4 = load.WaferWithBackend("share/redman/fake_blacklisting/v4/",
+                                                      Wafer(), ignore_missing=False)
+
+        self.assertFalse(wafer_with_backend_v4.hicanns().has_value())
+        self.assertFalse(wafer_with_backend_v4.fpgas().has_value())
+
 class TestXMLBackend(BackendTests, unittest.TestCase):
     def setUp(self):
         basedir = tempfile.mkdtemp()

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="18">
+<data class_id="0" tracking_level="0" version="1">
+	<px class_id="1" class_name="redman::resources::WaferWithBackend" tracking_level="1" version="2" object_id="_0">
+		<Wafer class_id="2" tracking_level="1" version="4" object_id="_1">
+			<Base class_id="3" tracking_level="0" version="0"></Base>
+			<hicanns class_id="4" tracking_level="0" version="1">
+				<px class_id="5" tracking_level="1" version="1" object_id="_2">
+					<predicate class_id="6" tracking_level="0" version="0"></predicate>
+					<selection class_id="7" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</hicanns>
+			<fpgas class_id="8" tracking_level="0" version="1">
+				<px class_id="9" tracking_level="1" version="1" object_id="_3">
+					<predicate class_id="10" tracking_level="0" version="0"></predicate>
+					<selection class_id="11" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</selection>
+					<hasvalue>0</hasvalue>
+				</px>
+			</fpgas>
+			<id class_id="12" tracking_level="0" version="0">
+				<value>0</value>
+			</id>
+			<backend class_id="13" tracking_level="0" version="1">
+				<px class_id="14" class_name="redman::backend::XMLBackend" tracking_level="1" version="0" object_id="_4">
+					<Backend class_id="15" tracking_level="0" version="0">
+						<config class_id="16" tracking_level="0" version="0">
+							<count>1</count>
+							<item_version>0</item_version>
+							<item class_id="17" tracking_level="0" version="0">
+								<first>path</first>
+								<second class_id="18" tracking_level="1" version="0" object_id="_5">
+									<which>0</which>
+									<value>./</value>
+								</second>
+							</item>
+						</config>
+					</Backend>
+					<path class_id="19" tracking_level="0" version="0">
+						<string>./</string>
+					</path>
+				</px>
+			</backend>
+		</Wafer>
+	</px>
+</data>
+</boost_serialization>
+
