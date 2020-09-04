@@ -8,7 +8,7 @@
 using namespace redman;
 using namespace redman::resources;
 namespace HMFC = halco::hicann::v2;
-TYPED_TEST_CASE(TestWithBackend, BackendTypes);
+TYPED_TEST_SUITE(TestWithBackend, BackendTypes);
 
 template <typename T>
 class AWaferWithBackend : public TestWithBackend<T> {
@@ -19,7 +19,7 @@ public:
 	HMFC::Wafer wafer_coordinate{0};
 	WaferWithBackend wafer;
 };
-TYPED_TEST_CASE(AWaferWithBackend, BackendTypes);
+TYPED_TEST_SUITE(AWaferWithBackend, BackendTypes);
 
 TYPED_TEST(AWaferWithBackend, PersistsDisabledHicanns) {
 	auto& wafer = TestFixture::wafer;

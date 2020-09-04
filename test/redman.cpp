@@ -1,7 +1,7 @@
 #include "redman/test/fixtures.h"
 
-TYPED_TEST_CASE(AManager, PolicyTypes);
-TYPED_TEST_CASE(AManagerWithEvenPredicate, PolicyTypes);
+TYPED_TEST_SUITE(AManager, PolicyTypes);
+TYPED_TEST_SUITE(AManagerWithEvenPredicate, PolicyTypes);
 
 using namespace redman;
 
@@ -171,7 +171,7 @@ struct TwoManagers : public ::testing::Test {
 	redman::ResourceManager<TestResource, T> other;
 };
 
-TYPED_TEST_CASE(TwoManagers, PolicyTypes);
+TYPED_TEST_SUITE(TwoManagers, PolicyTypes);
 
 TYPED_TEST(TwoManagers, CanBeMerged) {
 	auto& manager = TestFixture::manager;
@@ -225,7 +225,7 @@ public:
 	redman::ResourceManager<TestResource, T, LessThanPredicate> lt300;
 };
 
-TYPED_TEST_CASE(TwoParameterizedManagers, PolicyTypes);
+TYPED_TEST_SUITE(TwoParameterizedManagers, PolicyTypes);
 
 TYPED_TEST(TwoParameterizedManagers, CanBeMergedEvenIfThisThrowsAwayElements) {
 	auto& lt200 = TestFixture::lt200;
