@@ -1,1 +1,1 @@
-from load import HicannWithBackend, WaferWithBackend, FpgaWithBackend
+from .load import HicannWithBackend, WaferWithBackend, FpgaWithBackend

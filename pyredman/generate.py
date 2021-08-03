@@ -56,7 +56,7 @@ for cls in ['Wafer', 'Fpga', 'Hicann', 'WaferWithBackend', 'FpgaWithBackend', 'H
 def renamed(scope, regex, repl):
     regex = re.compile(regex)
     sanitize = lambda s: re.sub(r'\W+', '', s)
-    subfn = lambda match: repl.format(*map(sanitize, match.groups()))
+    subfn = lambda match: repl.format(*list(map(sanitize, match.groups())))
 
     f = custom_matcher_t(lambda decl: regex.match(decl.name))
     for c in ns.find(scope, 'classes', [f]):

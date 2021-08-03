@@ -40,7 +40,7 @@ if __name__ == '__main__':
     for enum in args.component_enum:
         coord = resource_type(Enum(enum))
         if args.action == "has":
-            print redman_component.has(coord)
+            print(redman_component.has(coord))
         elif args.action == "enable":
             redman_component.enable(coord, pyredman.switch_mode.NONTHROW)
         elif args.action == "disable":
