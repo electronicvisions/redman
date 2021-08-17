@@ -65,6 +65,7 @@ def build(bld):
             features        = 'use py',
             use             = '_pyredman',
             source          = bld.path.ant_glob('pyredman/**/*.py'),
-            install_from    = 'pyredman',
-            install_path    = '${PREFIX}/lib/pyredman'
+            relative_trick = True,
+            install_from    = '.',
+            install_path    = '${PREFIX}/lib'
         )

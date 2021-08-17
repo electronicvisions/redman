@@ -43,7 +43,7 @@ def build(bld):
                 'pyredmanimporttest.py',
                 ],
             target          = 'pyredman_tests',
-            features        = 'pytest',
+            features        = 'use pytest',
             use             = [ 'pyhalbe', 'pyredman' ] + bindings,
             install_path    = os.path.join('bin', 'tests'))
 
